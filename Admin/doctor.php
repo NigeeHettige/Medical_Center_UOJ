@@ -44,6 +44,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Center</title>
     <link rel="stylesheet" href="../CSS/appoinment.css">
+    <link rel="stylesheet" href="../CSS/doctor.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -147,7 +148,46 @@
                 while($row = mysqli_fetch_assoc($result)){
                     ?>
                     <div class="profile">
-                        
+                        <div class="prof_pic">
+                            <img src="../images/doctor.jpg" alt="Doctor Profile">
+                            <div class="prof_name">
+                                <h3><?php echo $row['dr_name']?></h3>
+                            </div>
+                        </div>
+                        <div class="prof_body">
+                            <div class="doc_details">
+                                <div>
+                                    <label for="hospital">Hospital</label>
+                                    <p><?php echo $row['hospital']?></p>
+                                   
+                                </div>
+                                <div>
+                                    <label for="nic">NIC</label>
+                                    <p><?php echo $row['nic']?></p>
+                                </div>
+                            </div>
+                            <div class="doc_details">
+                                <div>
+                                    <label for="contact_num">Contact Number</label>
+                                    <p><?php echo $row['contact_no']?></p>
+                                </div>
+                                <div>
+                                    <label for="address">Address</label>
+                                    <p><?php echo $row['address']?></p>
+                                </div>
+                            </div>
+                            <div class="doc_details">
+                                <div>
+                                    <label for="email">Email</label>
+                                    <p><?php echo $row['email']?></p>
+                                </div>
+                                <div>
+                                    <label for="gender">Gender</label>
+                                    <p><?php echo $row['gender']?></p>
+                                </div>
+                            </div>
+                            
+                        </div>
 
                     </div>
                     
