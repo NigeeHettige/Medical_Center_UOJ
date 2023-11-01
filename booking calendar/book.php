@@ -1,5 +1,5 @@
 <?php 
-include('connection.php');
+include('..\connection.php');
 
 if(isset($_GET['date'])){
     $date = $_GET['date'];

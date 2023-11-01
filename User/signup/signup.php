@@ -1,6 +1,6 @@
 <?php
 
-include('..\..\booking calendar\connection.php');
+include('..\..\connection.php');
 
 function setValue($name)
 {
@@ -100,7 +100,7 @@ if (isset($_POST['first_next'])) {
 
 
     <div class="form_wrap">
-
+    
         <?php function display1()
         { ?>
             <div class="form_1 data_info">
@@ -317,8 +317,9 @@ if (isset($_POST['first_next'])) {
                 </form>
             </div>
         <?php } ?>
-
+    
     </div>
+    
 
 
 

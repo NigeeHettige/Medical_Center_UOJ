@@ -1,3 +1,15 @@
+<?php 
+
+ include('..\connection.php');
+
+ session_start();
+    if(isset($_SESSION['username'])){
+        echo $_SESSION['username'];
+    } else {
+        echo "Chanuka";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +99,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Peshali!</span></h1>
+                    <h1 class="welcome"> Welcome <span class="wel_us">Chanuka</span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">
