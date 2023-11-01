@@ -3,10 +3,16 @@
  include('..\connection.php');
 
  session_start();
-    if(isset($_SESSION['username'])){
-        echo $_SESSION['username'];
-    } else {
-        echo "Chanuka";
+    if(!isset($_SESSION['username'])){
+        header("location: login/login.php");
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'signout'){
+            session_unset();
+            session_destroy();
+            header("location: login/login.php");
+        }
     }
 ?>
 
@@ -77,7 +83,7 @@
 
 
                <li>
-                <a href="login/login.php">
+                <a href="index.php?action=signout">
                     <span class="icon1"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title1"></span>
                     <span class="icon1">Sign Out</span>

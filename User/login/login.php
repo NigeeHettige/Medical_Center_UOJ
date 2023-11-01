@@ -4,21 +4,21 @@ include('..\..\connection.php');
 
 if (isset($_POST['user_Login'])) {
 
-    print_r($_POST);
-
     $reg_num = $_POST['reg_num'];
     $password = $_POST['password'];
 
     $query = "SELECT name_with_initials,password FROM user_details WHERE reg_number='$reg_num'";
     $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc($result);
-    $verified_password = password_verify($password, $row['password']);
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
+        $verified_password = password_verify($password, $row['password']);
 
-    if ($verified_password) {
-        session_start();
-        $_SESSION['reg_num'] = $reg_no;
-        $_SESSION['username'] = $row['name_with_initials'];
-        header("location: ../index.php");
+        if ($verified_password) {
+            session_start();
+            $_SESSION['reg_num'] = $reg_no;
+            $_SESSION['username'] = $row['name_with_initials'];
+            header("location: ../index.php");
+        }
     }
 }
 

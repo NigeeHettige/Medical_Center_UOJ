@@ -45,7 +45,7 @@ if(isset($_POST['submit'])){
 <body>
 
     <div class="login-container">
-        <h2>Login</h2>
+        <h2>Admin Login</h2>
         <form action="login.php" method="POST">
             <!-- reg number -->
             <div class="input-icon">
