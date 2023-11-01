@@ -1,3 +1,28 @@
+<?php
+
+    include('..\connection.php');
+    session_start();
+
+    if(!isset($_SESSION['admin_name'])){
+        header('location: login.php');
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'logout'){
+            session_unset();
+            session_destroy();
+            header("location: login.php");
+        }
+    }
+
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +90,7 @@
 
 
                <li>
-                <a href="login.php">
+                <a href="index.php?action=logout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>

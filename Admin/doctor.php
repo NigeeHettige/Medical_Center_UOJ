@@ -1,3 +1,42 @@
+<?php 
+
+    include('..\connection.php');
+    session_start();
+
+    if(!isset($_SESSION['admin_name'])){
+        header('location: login.php');
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'logout'){
+            session_unset();
+            session_destroy();
+            header("location: login.php");
+        }
+    }
+
+    if(isset($_POST['dr_submit'])){
+        $dr_name = $_POST['dr_name'];
+        $hospital = $_POST['hospital'];
+        $nic = $_POST['nic'];
+        $contact_number = $_POST['contact_number'];
+        $address = $_POST['address'];
+        $email = $_POST['email'];
+        $gender = $_POST['gender'];
+
+        $query = "INSERT INTO doctor (dr_name,hospital,nic,contact_no,address,email,gender) VALUES ('$dr_name','$hospital','$nic','$contact_number','$address','$email','$gender')";
+        $result = mysqli_query($connection,$query);
+        if($result){
+            echo "<script>alert('Insertion Successfull!')</script>";
+            header('location: doctor.php');
+        } else {
+            echo "<script>alert('Insertion Success!')</script>";
+        }
+    }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +104,7 @@
 
 
                <li>
-                <a href="login.php">
+                <a href="index.php?action=logout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>
@@ -75,9 +114,6 @@
 
             </ul>
         </div>
-
-
-    
 
         <!-- main -->
         <div class="main">
@@ -95,15 +131,34 @@
 
             </div>
         <!--  main ends -->
+        
 
             <!-- All appoinment section start -->
             <section id="appoinment">
+
+            <?php
+            
+                $query = "SELECT * from doctor";
+                $result = mysqli_query($connection,$query);
+                if(!$result){  
+                    echo "error fetching";
+                }
+
+                while($row = mysqli_fetch_assoc($result)){
+                    ?>
+                    <div class="profile">
+                        
+
+                    </div>
+                    
+                    
+                    <?php
+                }
+                ?>
+            
+            
                 
                 <a href="#" class="status2" onclick="viewPopup()"> <ion-icon name="add-circle-outline"></ion-icon></a>
-             
-        
-
-
                 
             </section>
             <!-- Appoinment section ends -->         
@@ -119,53 +174,47 @@
         <div class="popup" id="popup">
             <div class="close-btn" onclick="closeviewPopup()">&times;</div>
             <div class="form">
-                <h2>Make new Appoinment</h2>
-
-                <div class="form-element">
-                    <label for="regno" >Registration Number</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Department</label>
-                    <input type="text" placeholder="Your department">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Batch</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Full Name</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Telephone Number</label>
-                    <input type="tel" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Email</label>
-                    <input type="email" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Date</label>
-                    <input type="datePicker" class="datePicker">
-                </div>
-                <div class="form-element">
-                    <label for="time">Select Time</label>
-                    <select name="time" id="time">
-                        <option value="">9.00am</option>
-                        <option value="">9.30am </option>
-                        <option value="">10.00am</option>
-                        <option value="">10.30am</option>
-                        <option value="">11.00am</option>
-                        <option value="">11.30am</option>
-                        <option value="">1.00am</option>
-                        <option value="">1.30pm</option>
-                    </select>
-                </div>
-                <div class="form-element">
-                    <button type="submit">Submit</button>
-                </div>
-             
+                <h2>Add new doctor</h2>
+                    <form action="" method="POST">
+                    <!-- <div class="form-element">
+                        <label for="regno" >Registration Number</label>
+                        <input type="text" placeholder="Registration Number">
+                    </div> -->
+                    <div class="form-element">
+                        <label for="name" >Doctor Name</label>
+                        <input type="text" name="dr_name" placeholder="Name">
+                    </div>
+                    <div class="form-element">
+                        <label for="hospital" >Hospital</label>
+                        <input type="text" name="hospital" placeholder="Hospital">
+                    </div>
+                    <div class="form-element">
+                        <label for="nic" >NIC</label>
+                        <input type="text" name="nic" placeholder="NIC">
+                    </div>
+                    <div class="form-element">
+                        <label for="contact number" >Contact Number</label>
+                        <input type="tel" name="contact_number" placeholder="+94-xxxxxxx">
+                    </div>
+                    <div class="form-element">
+                        <label for="address" >Address</label>
+                        <input type="text" name="address" placeholder="No: 30/A, Jaffna.">
+                    </div>
+                    <div class="form-element">
+                        <label for="email" >Email</label>
+                        <input type="email" name="email" placeholder="example@gmail.com">
+                    </div>
+                    <div class="form-element">
+                        <label for="gender">Gender</label>
+                        <select name="gender" name="gender" id="time">
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-element">
+                        <button type="submit" name="dr_submit">Submit</button>
+                    </div>
+                </form>
 
 
             </div>
