@@ -1,6 +1,11 @@
 <?php
 
     include('..\connection.php');
+    session_start();
+
+    if(!isset($_SESSION['reg_num'])){
+        header("location ..\User\login\login.php");
+    }
     
     
     function build_calender($month,$year){

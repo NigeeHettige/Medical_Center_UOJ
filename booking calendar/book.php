@@ -1,5 +1,10 @@
 <?php 
 include('..\connection.php');
+session_start();
+
+if(!isset($_SESSION['reg_num'])){
+    header("location ..\User\login\login.php");
+}
 
 if(isset($_GET['date'])){
     $date = $_GET['date'];
@@ -70,8 +75,11 @@ if(isset($_POST['submit'])){
                Already Booked
             </div>";
    }else{
+        $username = $_SESSION["username"];
+        $email = $_SESSION['email'];
+        $reg_number = $_SESSION['reg_num'];
    
-        $query1 = "INSERT INTO bookings(date,time_slot,doctor) VALUES('$date','$timeslot','$doctor_name')";
+        $query1 = "INSERT INTO bookings(name,reg_number,email,date,time_slot,doctor) VALUES('$username','$reg_number','$email','$date','$timeslot','$doctor_name')";
         $result1 = mysqli_query($connection,$query1);
         if($result1){
             $msg = "<div class = 'alert alert-success'>

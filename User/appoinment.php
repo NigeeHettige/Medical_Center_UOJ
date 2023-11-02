@@ -129,20 +129,30 @@
                             <thead>
                                 <tr>
                                     <td>Appoinment ID</td>
-                                    <td>Name</td>
+                                    <td>Date</td>
                                     <td>Time</td>
                                     <td>Doctor</td>
                                     <td>Action</td>
                                 </tr>
                                 
                             </thead>
-
+                            <?php
+                                $regNo = $_SESSION['reg_num'];
+                                
+                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' ORDER BY date,time_slot LIMIT 1";
+                                $result = mysqli_query($connection,$query);
+                                if($result){
+                                   $row = mysqli_fetch_assoc($result);
+        
+                                }
+                            
+                            ?>
                             <tbody>
                                 <tr>
-                                    <td  data-label = "id">001</td>
-                                    <td  data-label = "name">Peshali Perera</td>
-                                    <td  data-label = "time">10.30am</td>
-                                    <td  data-label = "docname">Dr.Perera</td>
+                                    <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
+                                    <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
+                                    <td  data-label = "time"><?php if(isset($row)){echo $row['time_slot'];}?></td>
+                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['doctor'];} ?></td>
                                     <td  data-label = "action"><a href="#" class="status"><i class="fa-solid fa-trash"></i></a></td>
                                     
                                 </tr>
@@ -164,24 +174,34 @@
                             <thead>
                                 <tr>
                                     <td>Appoinment ID</td>
-                                    <td>Name</td>
+                                    <td>Date</td>
                                     <td>Time</td>
                                     <td>Doctor</td>
                                     <td>Remark</td>
                                 </tr>
                                 
                             </thead>
-
+                            <?php
+                               $query1 = "SELECT * FROM bookings WHERE reg_number = '$regNo' ORDER BY date,time_slot";
+                               $result1 = mysqli_query($connection,$query1);
+                               if($result1){
+                                  
+                                  while($row1 = mysqli_fetch_assoc($result1)){
+                               
+                            
+                            
+                            ?>
                             <tbody>
                                 <tr>
-                                    <td  data-label = "id">001</td>
-                                    <td  data-label = "name">Peshali Perera</td>
-                                    <td  data-label = "time">10.30am</td>
-                                    <td  data-label = "docname">Dr.Perera</td>
+                                    <td  data-label = "id"><?php if(isset($row1)){echo $row1['id'];} ?></td>
+                                    <td  data-label = "id"><?php if(isset($row1)){echo $row1['date'];} ?></td>
+                                    <td  data-label = "time"><?php if(isset($row1)){echo $row1['time_slot'];}?></td>
+                                    <td  data-label = "docname"><?php if(isset($row1)){echo $row1['doctor'];} ?></td>
                                     <td  data-label = "action"><a href="remark.php" class="status" style="background-color:grey;"><i class="fa-solid fa-arrow-right"></i></i></a></td>
 
                                 </tr>
-                                
+                                <?php }
+                                        }?>
                             </tbody>
                         </table>
                     </div>

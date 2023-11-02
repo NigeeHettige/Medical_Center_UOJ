@@ -14,6 +14,20 @@
             header("location: login/login.php");
         }
     }
+
+   if(isset($_GET['action'])){
+    if($_GET['action'] == 'appoinment_delete'){
+        $id = $_GET['id'];
+        $query2 = "DELETE FROM bookings WHERE id='$id'";
+        $result2 = mysqli_query($connection,$query2);
+        if($result2){
+            echo "<script>alert('Deletion Successfully!')</script>";
+            header("location: index.php");
+        }
+
+    }
+   }
+
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +133,16 @@
                 <div class="cardBox">
                     <div class="card1">
                         <div>
-                            <div class="numbers">1</div>
+                            <?php
+                                $regNo = $_SESSION['reg_num'];
+                                $query1 = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE() ORDER BY date";
+                                $result1 = mysqli_query($connection,$query1);
+                                if($result1){
+                                    $num_rows = mysqli_num_rows($result1);
+                                }
+                            
+                            ?>
+                            <div class="numbers"><?php echo $num_rows; ?></div>
                             <div class="cardName">Appoinments</div>
                         </div>
                         <div class="iconBx">
@@ -164,22 +187,35 @@
                             <thead>
                                 <tr>
                                     <td>Appoinment ID</td>
-                                    <td>Name</td>
                                     <td>Time</td>
                                     <td>Doctor</td>
                                     <td>Action</td>
                                 </tr>
                             </thead>
-    
+
                             <tbody>
-                                <tr>
-                                    <td  data-label = "id">001</td>
-                                    <td  data-label = "name">Peshali Perera</td>
-                                    <td  data-label = "time">10.30am</td>
-                                    <td  data-label = "docname">Dr.Perera</td>
-                                    <td  data-label = "action"><a href="#" class="status"><i class="fa-solid fa-trash"></i></a></td>
-                                </tr>
+
+                            <?php
+                                $regNo = $_SESSION['reg_num'];
+                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE() ORDER BY date";
+                                $result = mysqli_query($connection,$query);
+                                if($result){
+                                    while($row = mysqli_fetch_assoc($result)){
+                            ?>
+                                
+                                <tr style="height: 50px;">
+                                    <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
+                                    <td  data-label = "time"><?php if(isset($row)){echo $row['time_slot'];} ?></td>
+                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['doctor'];} ?></td>
+                                    <td  data-label = "action"><a href="?action=appoinment_delete&id=<?php echo $row['id'] ?>" class="status"><i class="fa-solid fa-trash"></i></a></td>
+                                </tr>  
+                
+                                <?php
+                        }
+                        }
+                        ?>
                             </tbody>
+                        
                         </table>
                     </div>
                 </div>
@@ -191,13 +227,6 @@
         </div>
 
     </div>
-
-
-
-  
-
-
-
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -217,7 +246,6 @@ console.log("Script executed");
 
 
     //menu toggle
-
     let toggle = document.querySelector('.toggle');
     let navigation = document.querySelector('.navigation');
     let main = document.querySelector('main');
@@ -229,8 +257,6 @@ console.log("Script executed");
 
 
     // // for change status color
-
-
     document.addEventListener("DOMContentLoaded",function(){
         const card2 = document.querySelector('.card2');
         const statusElement = card2.querySelector('.numbers');
@@ -249,12 +275,7 @@ console.log("Script executed");
     
     });
 
-
-    
 //    for diabling date
-
-
-
 
 $(function(){
     var arrayOfDates = ["25-08-2023","29-08-2023"];
@@ -285,9 +306,8 @@ $(function(){
 
 
 //blur 
-
-
-
     </script>
+
 </body>
+
 </html>

@@ -7,7 +7,7 @@ if (isset($_POST['user_Login'])) {
     $reg_num = $_POST['reg_num'];
     $password = $_POST['password'];
 
-    $query = "SELECT name_with_initials,password FROM user_details WHERE reg_number='$reg_num'";
+    $query = "SELECT name_with_initials,password,email FROM user_details WHERE reg_number='$reg_num'";
     $result = mysqli_query($connection, $query);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
@@ -18,6 +18,7 @@ if (isset($_POST['user_Login'])) {
                 session_start();
                 $_SESSION['reg_num'] = $reg_num;
                 $_SESSION['username'] = $row['name_with_initials'];
+                $_SESSION['email'] = $row['email'];
                 header("location: ../index.php");
             }
         }
