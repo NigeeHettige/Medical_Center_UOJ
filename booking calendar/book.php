@@ -50,8 +50,6 @@ function setValue($name){
 }
 
 if(isset($_POST['submit'])){
-    $name = $_POST['name'];
-    $email = $_POST['email'];
     $date = $_GET['date'];
     $timeslot = $_POST['timeslot'];
     $doctor_name = $_POST['doctor'];
@@ -73,7 +71,7 @@ if(isset($_POST['submit'])){
             </div>";
    }else{
    
-        $query1 = "INSERT INTO bookings(name,email,date,time_slot,doctor) VALUES('$name','$email','$date','$timeslot','$doctor_name')";
+        $query1 = "INSERT INTO bookings(date,time_slot,doctor) VALUES('$date','$timeslot','$doctor_name')";
         $result1 = mysqli_query($connection,$query1);
         if($result1){
             $msg = "<div class = 'alert alert-success'>
@@ -190,14 +188,14 @@ function timeslots($duration,$cleanup,$start,$end){
                                 </select>
                                
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="">Name</label>
                                 <input required type="text"  name ="name" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="">Email</label>
                                 <input required type="email"  name ="email" class="form-control">
-                            </div>
+                            </div> -->
                             <div class="form-group pull-right">
                                 
                                 <input  type="submit"  name ="submit" class="btn btn-primary" value="submit">

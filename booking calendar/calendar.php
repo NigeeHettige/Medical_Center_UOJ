@@ -94,7 +94,7 @@
                     $calender .= "<td class ='$today'><h4>$currentDay</h4><a class= 'btn btn-danger btn-xs' href= '#'>All Booked</a>";
                 }else{
                     $availableslots = 36-$totalbookings;
-                    $calender .= "<td class ='$today'><h4>$currentDay</h4><a class= 'btn btn-success btn-xs' href= 'book.php?date=".$date."'>Book</a><small><i >$availableslots slots left</i></small>";
+                    $calender .= "<td class ='$today'><h4>$currentDay</h4><a target='_blank' class= 'btn btn-success btn-xs' href= 'book.php?date=".$date."'>Book</a><small><i >$availableslots slots left</i></small>";
                 }
                 
             }    
@@ -168,7 +168,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Booking Calendar</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     
 

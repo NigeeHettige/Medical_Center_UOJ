@@ -74,7 +74,7 @@
 
 
                <li>
-                <a href="user_prof.php">
+                <a href="user_prof1/user.php" target="_blank">
                     <span class="icon1"><ion-icon name="person-outline"></ion-icon></span>
                     <span class="title1"></span>
                     <span class="icon1">User Profile</span>
@@ -105,7 +105,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Chanuka</span></h1>
+                    <h1 class="welcome"> Welcome <span class="wel_us"><?php echo $_SESSION['username']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">

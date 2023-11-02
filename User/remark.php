@@ -1,10 +1,28 @@
+<?php 
+
+ include('..\connection.php');
+
+ session_start();
+    if(!isset($_SESSION['username'])){
+        header("location: login/login.php");
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'signout'){
+            session_unset();
+            session_destroy();
+            header("location: login/login.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Center</title>
-    <link rel="stylesheet" href="../CSS/feedback.css">
+    <title>Remark</title>
+    <link rel="stylesheet" href="../CSS/feedback.css?=<?php echo time() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -56,7 +74,7 @@
 
 
                <li>
-                <a href="user_prof.php">
+               <a href="user_prof1/user.php" target="_blank">
                     <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">User Profile</span>
@@ -65,7 +83,7 @@
 
 
                <li>
-                <a href="login/login.php">
+               <a href="index.php?action=signout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>
@@ -87,7 +105,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Peshali!</span></h1>
+                    <h1 class="welcome"> Welcome <span class="wel_us"><?php echo $_SESSION['username']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">

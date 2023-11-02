@@ -11,14 +11,19 @@ if (isset($_POST['user_Login'])) {
     $result = mysqli_query($connection, $query);
     if ($result) {
         $row = mysqli_fetch_assoc($result);
-        $verified_password = password_verify($password, $row['password']);
+        if(isset($row)){
+            $verified_password = password_verify($password, $row['password']);
 
-        if ($verified_password) {
-            session_start();
-            $_SESSION['reg_num'] = $reg_no;
-            $_SESSION['username'] = $row['name_with_initials'];
-            header("location: ../index.php");
+            if ($verified_password) {
+                session_start();
+                $_SESSION['reg_num'] = $reg_num;
+                $_SESSION['username'] = $row['name_with_initials'];
+                header("location: ../index.php");
+            }
         }
+        
+    } else {
+        echo "<script>alert('Invalid Username or Password!')</script>";
     }
 }
 

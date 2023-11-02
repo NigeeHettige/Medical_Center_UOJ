@@ -1,10 +1,28 @@
+<?php 
+
+ include('..\connection.php');
+
+ session_start();
+    if(!isset($_SESSION['username'])){
+        header("location: login/login.php");
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action'] == 'signout'){
+            session_unset();
+            session_destroy();
+            header("location: login/login.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Center</title>
-    <link rel="stylesheet" href="../CSS/appoinment.css">
+    <title>Appoinment</title>
+    <link rel="stylesheet" href="../CSS/appoinment.css?=<?php echo time() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -56,7 +74,7 @@
 
 
                <li>
-                <a href="user_prof.php">
+                <a href="user_prof1/user.php" target="_blank">
                     <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">User Profile</span>
@@ -65,7 +83,7 @@
 
 
                <li>
-                <a href="login/login.php">
+                <a href="index.php?action=signout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>
@@ -87,7 +105,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Peshali!</span></h1>
+                    <h1 class="welcome"> Welcome <span class="wel_us"><?php echo $_SESSION['username']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">
@@ -99,7 +117,7 @@
             <!-- All appoinment section start -->
             <section id="appoinment">
                 
-                <a href="#" class="status2" onclick="viewPopup()">New Appoinment <ion-icon name="add-circle-outline"></ion-icon></a>
+                <a href="..\booking calendar\calendar.php" class="status2" target="_blank">New Appoinment <ion-icon name="add-circle-outline"></ion-icon></a>
              
                 <!-- current active appoinment  -->
                 <div class="details1 details">
@@ -178,64 +196,7 @@
 
 
 
-    <!-- Make new appoinment -->
-    <div class="popup_form" id="popup_form">
-        <div class="popup" id="popup">
-            <div class="close-btn" onclick="closeviewPopup()">&times;</div>
-            <div class="form">
-                <h2>Make new Appoinment</h2>
-
-                <div class="form-element">
-                    <label for="regno" >Registration Number</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Department</label>
-                    <input type="text" placeholder="Your department">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Batch</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Full Name</label>
-                    <input type="text" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Telephone Number</label>
-                    <input type="tel" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Email</label>
-                    <input type="email" placeholder="Registration Number">
-                </div>
-                <div class="form-element">
-                    <label for="regno" >Date</label>
-                    <input type="datePicker" class="datePicker">
-                </div>
-                <div class="form-element">
-                    <label for="time">Select Time</label>
-                    <select name="time" id="time">
-                        <option value="">9.00am</option>
-                        <option value="">9.30am </option>
-                        <option value="">10.00am</option>
-                        <option value="">10.30am</option>
-                        <option value="">11.00am</option>
-                        <option value="">11.30am</option>
-                        <option value="">1.00am</option>
-                        <option value="">1.30pm</option>
-                    </select>
-                </div>
-                <div class="form-element">
-                    <button type="submit">Submit</button>
-                </div>
-             
-
-
-            </div>
-        </div>
-    </div>
-    <!-- Make new appoinment end -->
+ 
 
 
   
