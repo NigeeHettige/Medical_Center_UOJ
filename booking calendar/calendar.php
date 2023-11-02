@@ -1,29 +1,12 @@
 <?php
+
+    include('..\connection.php');
     
     
     function build_calender($month,$year){
         include('..\connection.php');
-    //     $bookings = []; 
-       
 
-
-    //     $query = "SELECT * FROM bookings WHERE MONTH(date)=? AND YEAR(date)=?";
-    //     $statement = mysqli_prepare($connection,$query);
-    
-    //     mysqli_stmt_bind_param($statement,"ii",$month,$year);
-    //     mysqli_stmt_execute($statement);
-    //     $result = mysqli_stmt_get_result($statement);
-    //     $numOfrows = mysqli_num_rows($result);
-       
-    //    if($numOfrows> 0){
-    //         while($row = mysqli_fetch_assoc($result)){
-    //             $bookings[] = $row['date'];
-    //         }
-
-
-    //    }
-
-
+        
 
         //  array containing names of all days in week
         $daysOfWeek = array('Monday','Tuesday','Wednesday','Thursday','Friday','Staurday','Sunday');
@@ -42,7 +25,11 @@
 
         // getting index values of this month
         $dayOfWeek = $dateComponents['wday'];
-        if($day)
+        if($dayOfWeek == 0){
+            $dayOfWeek = 6;
+        }else{
+            $dayOfWeek = $dayOfWeek-1;
+        }
         //getting current date
         $dateToday = date('Y-m-d');
 
@@ -57,7 +44,6 @@
         $calender.= " <a class='btn btn-xs btn-primary month' href='?month=".date('m')."&year=".date('Y')."'>Current Month</a> ";
         
         $calender.= "<a class='btn btn-xs btn-primary month' href='?month=".date('m', mktime(0, 0, 0, $month+1, 1, $year))."&year=".date('Y', mktime(0, 0, 0, $month+1, 1, $year))."'>Next Month</a></center><br>";
-        
         
         
         $calender.= "<tr>";
@@ -102,8 +88,15 @@
                 $calender .= "<td><h4>$currentDay</h4><button class= 'btn btn-danger btn-xs'>N/A</button>";
             }
             else{
+            
+                $totalbookings = checkSlots($connection,$date);
+                if($totalbookings == 36){
+                    $calender .= "<td class ='$today'><h4>$currentDay</h4><a class= 'btn btn-danger btn-xs' href= '#'>All Booked</a>";
+                }else{
+                    $availableslots = 36-$totalbookings;
+                    $calender .= "<td class ='$today'><h4>$currentDay</h4><a class= 'btn btn-success btn-xs' href= 'book.php?date=".$date."'>Book</a><small><i >$availableslots slots left</i></small>";
+                }
                 
-                $calender .= "<td class ='$today'><h4>$currentDay</h4><a class= 'btn btn-success btn-xs' href= 'book.php?date=".$date."'>Book</a>";
             }    
                 
                 
@@ -136,7 +129,30 @@
                        
     }
 
+    function checkSlots($mysqli,$date){
+        $totalbookings = 0; 
+       
+
+
+        $query = "SELECT * FROM bookings WHERE date=?";
+        include('..\connection.php');
+        $statement = mysqli_prepare($connection,$query);
     
+        mysqli_stmt_bind_param($statement,"s",$date);
+        mysqli_stmt_execute($statement);
+        $result = mysqli_stmt_get_result($statement);
+        $numOfrows = mysqli_num_rows($result);
+       
+       if($numOfrows> 0){
+            while($row = mysqli_fetch_assoc($result)){
+                $totalbookings++;
+            }
+
+
+       }
+
+       return $totalbookings;
+    }
     
     
 ?>
@@ -154,6 +170,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    
 
     <style>
         .today{

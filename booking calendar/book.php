@@ -54,6 +54,7 @@ if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $date = $_GET['date'];
     $timeslot = $_POST['timeslot'];
+    $doctor_name = $_POST['doctor'];
 
     $query = "SELECT * FROM bookings WHERE date= ? AND time_slot= ?";
     $statement = mysqli_prepare($connection,$query);
@@ -72,7 +73,7 @@ if(isset($_POST['submit'])){
             </div>";
    }else{
    
-        $query1 = "INSERT INTO bookings(name,email,date,time_slot) VALUES('$name','$email','$date','$timeslot')";
+        $query1 = "INSERT INTO bookings(name,email,date,time_slot,doctor) VALUES('$name','$email','$date','$timeslot','$doctor_name')";
         $result1 = mysqli_query($connection,$query1);
         if($result1){
             $msg = "<div class = 'alert alert-success'>
@@ -180,6 +181,14 @@ function timeslots($duration,$cleanup,$start,$end){
                             <div class="form-group">
                                 <label for="">Timeslot:</label>
                                 <input required  type="text" readonly name ="timeslot" id ="timeslot" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Doctor</label>
+                                <select name='doctor' class="form-control">
+                                    <option value="Dr.Mrs. J. Sriskandarajah">Dr.Mrs. J. Sriskandarajah</option>
+                                    <option value="Dr. J. Lawrence">Dr. J. Lawrence</option>
+                                </select>
+                               
                             </div>
                             <div class="form-group">
                                 <label for="">Name</label>

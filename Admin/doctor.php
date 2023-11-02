@@ -135,6 +135,7 @@
         
 
             <!-- All appoinment section start -->
+           
             <section id="appoinment">
 
             <?php
@@ -147,13 +148,16 @@
 
                 while($row = mysqli_fetch_assoc($result)){
                     ?>
+                
                     <div class="profile">
+                        <center>
                         <div class="prof_pic">
                             <img src="../images/doctor.jpg" alt="Doctor Profile">
                             <div class="prof_name">
                                 <h3><?php echo $row['dr_name']?></h3>
                             </div>
                         </div>
+                        </center>
                         <div class="prof_body">
                             <div class="doc_details">
                                 <div>
@@ -161,26 +165,38 @@
                                     <p><?php echo $row['hospital']?></p>
                                    
                                 </div>
+                            </div>
+
+                            <div class="doc_details">
                                 <div>
                                     <label for="nic">NIC</label>
                                     <p><?php echo $row['nic']?></p>
                                 </div>
                             </div>
+
                             <div class="doc_details">
                                 <div>
                                     <label for="contact_num">Contact Number</label>
                                     <p><?php echo $row['contact_no']?></p>
                                 </div>
+
+                            </div>
+
+                            <div class="doc_details">
                                 <div>
                                     <label for="address">Address</label>
                                     <p><?php echo $row['address']?></p>
                                 </div>
                             </div>
+
                             <div class="doc_details">
                                 <div>
                                     <label for="email">Email</label>
                                     <p><?php echo $row['email']?></p>
                                 </div>
+                            </div>  
+                            
+                            <div class="doc_details">
                                 <div>
                                     <label for="gender">Gender</label>
                                     <p><?php echo $row['gender']?></p>
@@ -201,6 +217,7 @@
                 <a href="#" class="status2" onclick="viewPopup()"> <ion-icon name="add-circle-outline"></ion-icon></a>
                 
             </section>
+           
             <!-- Appoinment section ends -->         
 
         </div>
