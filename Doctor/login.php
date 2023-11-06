@@ -1,3 +1,32 @@
+<?php
+
+    include('..\connection.php');
+    session_start();
+
+    if(isset($_POST['login_submit'])){
+        $dr_nic = $_POST['dr_nic'];
+        $dr_password = $_POST['dr_password'];
+
+        $query = "SELECT * FROM doctor WHERE nic = '$dr_nic'";
+        $result = mysqli_query($connection,$query);
+        if($result){
+            $row = mysqli_fetch_assoc($result);
+            $verified = password_verify($dr_password,$row['password']);
+
+            if($verified){
+                $_SESSION['dr_nic'] = $row['nic'];
+                $_SESSION['dr_name'] = $row['dr_name'];
+                header('location: index.php');
+            }
+        }
+    }
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,20 +41,20 @@
 
     <div class="login-container">
         <h2>Doctor Login</h2>
-        <form action="">
+        <form action="" method="POST">
             <!-- reg number -->
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input type="text" name="" id="regno" placeholder="User Name" required>
+                <input type="text" name="dr_nic" id="regno" placeholder="User Name" required>
             </div>
 
             <!-- password -->
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
-                <input type="password" name="" id="pwd" placeholder="Password" required>
+                <input type="password" name="dr_password" id="pwd" placeholder="Password" required>
             </div>
 
-            <button type="submit">Login</button>
+            <button type="submit" name="login_submit">Login</button>
         </form>
         <p><a href ="changepwd.php"> Change password?</a></p>
     </div>

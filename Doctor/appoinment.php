@@ -65,7 +65,7 @@
 
 
                <li>
-                <a href="login.php">
+                <a href="?action=logout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>

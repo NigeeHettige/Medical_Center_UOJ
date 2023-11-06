@@ -1,3 +1,22 @@
+<?php 
+
+    session_start();
+
+    if(!$_SESSION['dr_nic']){
+        header('location: login.php');
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action']=='logout'){
+            session_unset();
+            session_destroy();
+            echo "<script>alert('You are going to logout!');</script>";
+            header('location: login.php');
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,7 +84,7 @@
 
 
                <li>
-                <a href="login.php">
+                <a href="?action=logout">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Sign Out</span>

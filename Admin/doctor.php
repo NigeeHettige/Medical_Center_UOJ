@@ -3,6 +3,7 @@
     include('..\connection.php');
     session_start();
 
+
     if(!isset($_SESSION['admin_name'])){
         header('location: login.php');
     }
@@ -23,8 +24,9 @@
         $address = $_POST['address'];
         $email = $_POST['email'];
         $gender = $_POST['gender'];
+        $password = $_POST['password'];
 
-        $query = "INSERT INTO doctor (dr_name,hospital,nic,contact_no,address,email,gender) VALUES ('$dr_name','$hospital','$nic','$contact_number','$address','$email','$gender')";
+        $query = "INSERT INTO doctor (dr_name,hospital,nic,contact_no,address,email,gender,password) VALUES ('$dr_name','$hospital','$nic','$contact_number','$address','$email','$gender','$password')";
         $result = mysqli_query($connection,$query);
         if($result){
             echo "<script>alert('Insertion Successfull!')</script>";
@@ -268,6 +270,7 @@
                             <option value="Female">Female</option>
                         </select>
                     </div>
+                    <input type="hidden" name="password" value="$2y$10$QCYYeXwXWhOWBr6yuN15AOFlAm18SuCKlUizBhjnuHiylUbaj0KCu">
                     <div class="form-element">
                         <button type="submit" name="dr_submit">Submit</button>
                     </div>
