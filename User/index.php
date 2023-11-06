@@ -164,7 +164,12 @@
     
                     <div class="card3" id="date">
                         <div>
-                            <div class="numbers" >14<sup class="sup">th</sup><span > December</span></div>
+                            <!-- <div class="numbers" >14<sup class="sup">th</sup><span > December</span></div> -->
+                            <?php
+                            $today = date('j<\s\u\p class="sup">S</\s\u\p> F');
+                            echo '<div class="numbers">' . $today . '</div>';
+                            ?>
+
                             <div class="cardName">Date</div>
                         </div>
                         <div class="iconBx">

@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remark</title>
-    <link rel="stylesheet" href="../CSS/feedback.css?=<?php echo time() ?>">
+    <link rel="stylesheet" href="appoinment.css?=<?php echo time() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -116,69 +116,55 @@
 
 
             <!-- Feedback section starts -->
-            <section class="Feedback"id="feedback">
-                <div class="feedback_form" >
-                    <div class="feedback" >
+            <section id="appoinment">
+                
+                <!-- <a href="..\booking calendar\calendar.php" class="status2" target="_blank">New Appoinment <ion-icon name="add-circle-outline"></ion-icon></a> -->
+             
+                <!-- current active appoinment  -->
+                <div class="details3 details">
+                    <div class="recentOrders1">
                         
-                        <div class="form">
-                            <h2>Drop us a Feedback</h2>
-            
-                            <div class="form-element" id="star">
-                                <div class="container_rate">
-                                    <div class="star-widget">
-                                        <input type="radio" name="rate" id="rate-5">
-                                        <label for="rate-5" class="fas fa-star"></label>
-                                        <input type="radio" name="rate" id="rate-4">
-                                        <label for="rate-4" class="fas fa-star"></label>
-                                        <input type="radio" name="rate" id="rate-3">
-                                        <label for="rate-3" class="fas fa-star"></label>
-                                        <input type="radio" name="rate" id="rate-2">
-                                        <label for="rate-2" class="fas fa-star"></label>
-                                        <input type="radio" name="rate" id="rate-1">
-                                        <label for="rate-1" class="fas fa-star"></label>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Appoinment ID</td>
+                                    <td>Date</td>
+                                    <td>Doctor</td>
+                                    <td>Cause</td>
+                                    <td>Remark</td>
+                                </tr>
+                                
+                            </thead>
                             
-                                        <h6></h6>
-                                    </div>
-                                </div>
-                           </div>
+                            <tbody>
+                            <?php
+                                $regNo = $_SESSION['reg_num'];
+                                
+                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo'  ORDER BY date,time_slot  DESC";
+                                $result = mysqli_query($connection,$query);
+                                if($result){
+                                   
+                                    while($row = mysqli_fetch_assoc($result)){
+                                
                             
-                            <div class="form-element">
-                                <label for="regno" >Email</label>
-                                <input type="email" placeholder="Your Email">
-                             </div>
-
-                            <div class="form-element">
-                                <label for="regno" >Overall Experience </label>
-                                <textarea name="" id="" cols="30" rows="3"></textarea>
-                               
-                            </div>
-                            <div class="form-element">
-                                <label for="regno" >Staff Interaction and Communication</label>
-                                 <textarea name="" id="" cols="30" rows="3"></textarea>
-                               
-                            </div>
-                            <div class="form-element">
-                                <label for="regno" >Quality of Medical Treatment</label>
-                                <textarea name="" id="" cols="30" rows="3"></textarea>
-                            </div>
-                            <div class="form-element">
-                                <label for="regno" >Likelihood to Recommend</label>
-                                <textarea name="" id="" cols="30" rows="3"></textarea>
-                            </div>
-                            
-                            
-                           
-                          
-
-
-                            <div class="form-element feedback-special">
-                                <center><button type="submit" id="feedback-btn">Submit</button></center>
-                            </div>
-                         
-            
-                        </div>
+                            ?>
+                                <tr>
+                                    <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
+                                    <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
+                                    <td  data-label = "time"><?php if(isset($row)){echo $row['doctor'];}?></td>
+                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['time_slot'];} ?></td>
+                                    <td  data-label = "action"><a href="#" class="remark"><i class="fa-solid fa-eye"></i></a></td>
+                                    
+                                </tr>
+                               <?php }}?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+                 <!-- current active appoinment end -->
+
+
+                 
             </section>
             <!-- Feedback section ends -->
 

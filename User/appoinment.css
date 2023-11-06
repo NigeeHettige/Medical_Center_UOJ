@@ -267,6 +267,14 @@ body{
     transform: translate(-50%,0%);  
  }
 
+ .details3{
+    position: relative;
+    padding: 20px;
+    transform: translate(-50%,0%);  
+    left: 50%;
+    display: flex;
+    justify-content: center;
+ }
 
 
 .recentOrders, .recentOrders1{
@@ -373,6 +381,18 @@ table td{
 .status{
     padding: 5px 10px;
     background: rgb(255, 65, 65);
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    /* color: rgb(255, 95, 95);
+    color: rgb(95, 255, 164); */
+
+}
+.remark{
+    padding: 5px 10px;
+    background: rgb(186, 184, 184);
     color: var(--white);
     border-radius: 4px;
     font-size: 14px;
