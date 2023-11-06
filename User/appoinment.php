@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appoinment</title>
-    <link rel="stylesheet" href="../CSS/appoinment.css?=<?php echo time() ?>">
+    <link rel="stylesheet" href="appoinment.css?=<?php echo time() ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -136,18 +136,19 @@
                                 </tr>
                                 
                             </thead>
+                            
+                            <tbody>
                             <?php
                                 $regNo = $_SESSION['reg_num'];
                                 
-                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' ORDER BY date,time_slot LIMIT 1";
+                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE() ORDER BY date,time_slot";
                                 $result = mysqli_query($connection,$query);
                                 if($result){
-                                   $row = mysqli_fetch_assoc($result);
-        
-                                }
+                                   
+                                    while($row = mysqli_fetch_assoc($result)){
+                                
                             
                             ?>
-                            <tbody>
                                 <tr>
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
@@ -156,7 +157,7 @@
                                     <td  data-label = "action"><a href="#" class="status"><i class="fa-solid fa-trash"></i></a></td>
                                     
                                 </tr>
-                               
+                               <?php }}?>
                             </tbody>
                         </table>
                     </div>

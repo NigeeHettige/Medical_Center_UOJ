@@ -197,7 +197,7 @@
 
                             <?php
                                 $regNo = $_SESSION['reg_num'];
-                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE() ORDER BY date";
+                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE()  ORDER BY date,time_slot LIMIT 1";
                                 $result = mysqli_query($connection,$query);
                                 if($result){
                                     while($row = mysqli_fetch_assoc($result)){
