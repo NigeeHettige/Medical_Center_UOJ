@@ -1,5 +1,6 @@
 <?php 
-
+    
+    include('..\connection.php'); 
     session_start();
 
     if(!$_SESSION['dr_nic']){
@@ -119,8 +120,17 @@
                 <!-- cards -->
                 <div class="cardBox">
                     <div class="card1">
+                                    <?php 
+                                    
+                                    $id = $_SESSION['dr_id'];
+                                    $query = "SELECT * FROM bookings WHERE doctor = '$id'";
+                                    $result = mysqli_query($connection,$query);
+                                    $numOfRows = mysqli_num_rows($result);     
+                                
+                                ?>
+
                         <div>
-                            <div class="numbers">1</div>
+                            <div class="numbers"><?php echo $numOfRows?></div>
                             <div class="cardName">Total Appoinments</div>
                         </div>
                         <div class="iconBx">
