@@ -224,6 +224,7 @@
             
                 
                 <a href="#" class="status2" onclick="viewPopup()"> <ion-icon name="add-circle-outline"></ion-icon></a>
+
                 
             </section>
            

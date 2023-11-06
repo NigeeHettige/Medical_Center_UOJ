@@ -152,8 +152,8 @@
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
                                     <td  data-label = "time"><?php if(isset($row)){echo $row['doctor'];}?></td>
-                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['time_slot'];} ?></td>
-                                    <td  data-label = "action"><a href="#" class="remark"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['cause'];} ?></td>
+                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup()"><i class="fa-solid fa-eye"></i></a></td>
                                     
                                 </tr>
                                <?php }}?>
@@ -176,16 +176,14 @@
     </div>
 
 
-  
-
-
+       
 
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
 
-console.log("Script executed");
+    console.log("Script executed");
 
       //add hovered class in selected list item  
       let list = document.querySelectorAll('.navigation li');
@@ -235,9 +233,6 @@ console.log("Script executed");
     
 //    for diabling date
 
-
-
-
 $(function(){
     var arrayOfDates = ["25-08-2023","29-08-2023"];
 
@@ -271,5 +266,28 @@ $(function(){
 
 
     </script>
+     <!-- Make new appoinment -->
+     <div class="popup_form" id="popup_form">
+        <div class="popup" id="popup"   style="margin-top: 150px">
+            <div class="close-btn" onclick="closeviewPopup()">&times;</div>
+            <div class="form">
+                <h2>Remark</h2>
+                    <form action="" method="POST">
+                    <div class="form-element">
+                        <label for="cause" >Cause</label>
+                        <input type="text" placeholder="fever" readonly>
+                    </div>
+                    <div class="form-element">
+                        <label for="regno" >Prescription Details</label>
+                        <textarea rows='15'></textarea>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        </div>
+        <!-- Make new appoinment end -->
 </body>
+
 </html>

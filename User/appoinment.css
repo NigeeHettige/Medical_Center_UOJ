@@ -435,7 +435,7 @@ tr{
 
 .popup{
     position: absolute;
-    top: 500px;
+    top: 100px;
     left: 50%;
     opacity: 0;
     transform: translate(-50%,-50%) scale(1.25);
@@ -451,7 +451,7 @@ tr{
 }
 
 .popup.active{
-    top: 380px;
+    top:    100px;
     opacity: 1;
     visibility: visible;
     transform: translate(-50%,-50%) scale(1);
@@ -498,6 +498,7 @@ tr{
 .popup .form .form-element input[type="tel"],
 .popup .form .form-element input[type="email"],
 .popup .form .form-element input[type="datePicker"],
+textarea,
 .popup .form .form-element select{
     margin-top: 5px;
     display: block;
