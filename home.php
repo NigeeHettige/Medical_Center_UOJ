@@ -18,7 +18,7 @@ function setValue($name){
 
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?=<?php echo time() ?>">
 
 </head>
 <body>
@@ -88,14 +88,14 @@ function setValue($name){
     
     <div class="icons">
         <i class="fas fa-user-md"></i>
-        <h3>140+</h3>
+        <h3>2+</h3>
         <p>doctors at work</p>
     </div>
 
     
     <div class="icons">
         <i class="fas fa-users"></i>
-        <h3>140+</h3>
+        <h3>13+</h3>
         <p>staff at work</p>
     </div>
 
@@ -103,13 +103,13 @@ function setValue($name){
    
     <div class="icons">
         <i class="fas fa-procedures"></i>
-        <h3>500+</h3>
+        <h3>2+</h3>
         <p>bed facility</p>
     </div>
 
     <div class="icons">
         <i class="fas fa-hospital"></i>
-        <h3>80+</h3>
+        <h3>6+</h3>
         <p>available hours</p>
     </div>
 
@@ -230,9 +230,9 @@ function setValue($name){
 
     <div class="box-container">
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/doctor_fe.jpg" alt="">
+            <h3>Dr.Mrs. J. Sriskandarajah</h3>
+            <span>University Medical Officer</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -243,9 +243,9 @@ function setValue($name){
         </div>
 
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/doc_ma.jpg" alt="">
+            <h3>Dr. J. Lawrence</h3>
+            <span>Asst. University Medical Officer</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -256,9 +256,9 @@ function setValue($name){
         </div>
 
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr.S.Selvaratnam</h3>
+            <span>Technical Officer</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -268,23 +268,12 @@ function setValue($name){
             </div>
         </div>
 
-        <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
-            <div class="share">
-                <a href="#" class="fab fa-facebook-f"></a>
-                <a href="#" class="fab fa-twitter"></a>
-                <a href="#" class="fab fa-instagram"></a>
-                <a href="#" class="fab fa-linkedin"></a>
-
-            </div>
-        </div>
+       
 
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/nurse.jpg" alt="">
+            <h3>Mrs.R.Navitha</h3>
+            <span>Nursing Officer Gr.II</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -296,9 +285,9 @@ function setValue($name){
 
             
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/nurse.jpg" alt="">
+            <h3>Mrs.A. Karthiga</h3>
+            <span>Nursing Officer Gr.II</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -309,9 +298,9 @@ function setValue($name){
             
         </div>
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/nurse.jpg" alt="">
+            <h3>Miss. P. Kisiha</h3>
+            <span>Nursing Officer Gr.II</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
@@ -322,9 +311,106 @@ function setValue($name){
         </div>
 
         <div class="box">
-            <img src="images/doc.jpg" alt="">
-            <h3>Dr.Akarawita</h3>
-            <span>expert doctor</span>
+            <img src="images/nurse.jpg" alt="">
+            <h3>Mrs.S.Vimalenthirnathan</h3>
+            <span>Nursing Officer Gr.II</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+
+        <div class="box">
+            <img src="images/nurse.jpg" alt="">
+            <h3>Mrs.G.Manoranjan</h3>
+            <span>Pharmacist Upper Grade</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/nurse.jpg" alt="">
+            <h3>Mrs.N. Surenthiran</h3>
+            <span>Pharmacist Lower Grade</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr.K.Sasikaran</h3>
+            <span>Labourer</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr.J. Dilakshan</h3>
+            <span>Attendant (Male)</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/nurse.jpg" alt="">
+            <h3>Miss.T. Sharmila</h3>
+            <span>Attendant(Female)</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr. A. Vijenthiran</h3>
+            <span>Health Services Labourer Gr.II</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr. K Thusyanthan</h3>
+            <span>Health Services Labourer Gr.III</span>
+            <div class="share">
+                <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-twitter"></a>
+                <a href="#" class="fab fa-instagram"></a>
+                <a href="#" class="fab fa-linkedin"></a>
+
+            </div>
+        </div>
+        <div class="box">
+            <img src="images/m_nurse.jpg" alt="">
+            <h3>Mr. S. Savunthararajah</h3>
+            <span>Public Health Inspector</span>
             <div class="share">
                 <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
