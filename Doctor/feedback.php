@@ -1,3 +1,22 @@
+<?php 
+
+    session_start();
+
+    if(!$_SESSION['dr_nic']){
+        header('location: login.php');
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action']=='logout'){
+            session_unset();
+            session_destroy();
+            echo "<script>alert('You are going to logout!');</script>";
+            header('location: login.php');
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +106,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Peshali!</span></h1>
+                <h1 class="welcome"> Welcome <span class="wel_us">Dr. <?php echo $_SESSION['dr_name']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">

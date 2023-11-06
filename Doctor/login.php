@@ -14,6 +14,7 @@
             $verified = password_verify($dr_password,$row['password']);
 
             if($verified){
+                $_SESSION['dr_id'] = $row['dr_id'];
                 $_SESSION['dr_nic'] = $row['nic'];
                 $_SESSION['dr_name'] = $row['dr_name'];
                 header('location: index.php');

@@ -3,6 +3,12 @@
     include('..\connection.php');
     session_start();
 
+    function setValue($name){
+        if(isset($_POST[$name])){
+            echo $_POST[$name];
+        }
+    }
+
 
     if(!isset($_SESSION['admin_name'])){
         header('location: login.php');
@@ -25,6 +31,7 @@
         $email = $_POST['email'];
         $gender = $_POST['gender'];
         $password = $_POST['password'];
+        print_r($_POST);
 
         $query = "INSERT INTO doctor (dr_name,hospital,nic,contact_no,address,email,gender,password) VALUES ('$dr_name','$hospital','$nic','$contact_number','$address','$email','$gender','$password')";
         $result = mysqli_query($connection,$query);
@@ -241,31 +248,31 @@
                     </div> -->
                     <div class="form-element">
                         <label for="name" >Doctor Name</label>
-                        <input type="text" name="dr_name" placeholder="Name">
+                        <input type="text" name="dr_name" placeholder="Name" value='<?php setValue('dr_name') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="hospital" >Hospital</label>
-                        <input type="text" name="hospital" placeholder="Hospital">
+                        <input type="text" name="hospital" placeholder="Hospital" value='<?php setValue('hospital') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="nic" >NIC</label>
-                        <input type="text" name="nic" placeholder="NIC">
+                        <input type="text" name="nic" placeholder="NIC" value='<?php setValue('nic') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="contact number" >Contact Number</label>
-                        <input type="tel" name="contact_number" placeholder="+94-xxxxxxx">
+                        <input type="tel" name="contact_number" placeholder="+94-xxxxxxx" value='<?php setValue('contact_number') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="address" >Address</label>
-                        <input type="text" name="address" placeholder="No: 30/A, Jaffna.">
+                        <input type="text" name="address" placeholder="No: 30/A, Jaffna." value='<?php setValue('address') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="email" >Email</label>
-                        <input type="email" name="email" placeholder="example@gmail.com">
+                        <input type="email" name="email" placeholder="example@gmail.com" value='<?php setValue('email') ?>'>
                     </div>
                     <div class="form-element">
                         <label for="gender">Gender</label>
-                        <select name="gender" name="gender" id="time">
+                        <select name="gender" name="gender" id="time" value='<?php setValue('gender') ?>'>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                         </select>

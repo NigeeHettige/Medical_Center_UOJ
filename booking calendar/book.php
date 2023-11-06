@@ -191,10 +191,26 @@ function timeslots($duration,$cleanup,$start,$end){
                             <div class="form-group">
                                 <label for="">Doctor</label>
                                 <select name='doctor' class="form-control">
-                                    <option value="Dr.Mrs. J. Sriskandarajah">Dr.Mrs. J. Sriskandarajah</option>
-                                    <option value="Dr. J. Lawrence">Dr. J. Lawrence</option>
+                                    <!-- <option value="Dr.Mrs. J. Sriskandarajah">Dr.Mrs. J. Sriskandarajah</option>
+                                    <option value="Dr. J. Lawrence">Dr. J. Lawrence</option> -->
+                                    <?php 
+                                    
+                                    $query = "SELECT * FROM doctor";
+                                    $result = mysqli_query($connection,$query);
+                                    if($result){
+                                        while($row=mysqli_fetch_assoc($result)){
+                                            ?>
+                                            
+                                            <option value="<?php echo $row['dr_id']?>"><?php echo $row['dr_name']?></option>
+              
+                                            
+                                            <?php
+                                        }
+                                    }
+                                    
+                                    
+                                    ?>
                                 </select>
-                               
                             </div>
                             <!-- <div class="form-group">
                                 <label for="">Name</label>

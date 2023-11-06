@@ -106,7 +106,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Doctor</span></h1>
+                    <h1 class="welcome"> Welcome <span class="wel_us">Dr. <?php echo $_SESSION['dr_name']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">

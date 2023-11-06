@@ -1,3 +1,25 @@
+<?php 
+
+    include('..\connection.php');   
+    session_start();
+
+    if(!$_SESSION['dr_nic']){
+        header('location: login.php');
+    }
+
+    if(isset($_GET['action'])){
+        if($_GET['action']=='logout'){
+            session_unset();
+            session_destroy();
+            echo "<script>alert('You are going to logout!');</script>";
+            header('location: login.php');
+        }
+    }
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -87,7 +109,7 @@
                 </div>
 
                 <!-- search -->
-                    <h1 class="welcome"> Welcome <span class="wel_us">Doctor</span></h1>
+                <h1 class="welcome"> Welcome <span class="wel_us">Dr. <?php echo $_SESSION['dr_name']?></span></h1>
                  <!-- user Image -->
                  <div class="user">
                     <img src="images/user.jpg" alt="">
@@ -119,13 +141,36 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td>2020/CCS/068</td>
-                                    <td>Peshali Perera</td>
-                                    <td>10.30am</td>
-                                    <td ><a href="#" class="status" ><i class="fa-solid fa-trash"></i></a></td>
+
+                                <?php 
                                     
-                                </tr>
+                                    $id = $_SESSION['dr_id'];
+                                    $query = "SELECT * FROM bookings WHERE doctor = '$id'";
+                                    $result = mysqli_query($connection,$query);
+                                    if($result){
+
+                                        while($row=mysqli_fetch_assoc($result)){
+
+                                            ?>
+
+                                                <tr>
+                                                    <td><?php echo $row['reg_number']?></td>
+                                                    <td><?php echo $row['name']?></td>
+                                                    <td><?php echo $row['time_slot']?></td>
+                                                    <td ><a href="#" class="status" ><i class="fa-solid fa-trash"></i></a></td>
+                                                    
+                                                </tr>
+                                            <?php
+
+                                        }
+
+                                    }
+                                
+                                
+                                
+                                ?>
+
+                                
                                
                             </tbody>
                         </table>
