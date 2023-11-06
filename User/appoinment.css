@@ -249,17 +249,24 @@ body{
     margin-top: 75px;
 }
 
-.details1, .details2{
+.details1{
     position: relative;
-    top: 100px;
     left: 50%;
-    transform: translate(-50%,-50%);
-    padding: 20px ;
+    transform: translate(-50%,0%);
+    padding: 20px;
     display: flex; 
     justify-content: center;
-    margin-top: 10px;
-    
  }
+
+ .details2{
+    position: relative; 
+    left: 50%;
+    padding: 20px ;
+    display: flex;
+    justify-content: center;
+    transform: translate(-50%,0%);  
+ }
+
 
 
 .recentOrders, .recentOrders1{
@@ -267,6 +274,7 @@ body{
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0,0,0.08);
     border-radius: 20px;
+   
 }
 
 .cardHeader h2,.cardHeader1 h2{

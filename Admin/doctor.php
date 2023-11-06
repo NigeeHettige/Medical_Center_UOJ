@@ -163,7 +163,7 @@
                         <div class="prof_pic">
                             <img src="../images/doctor.jpg" alt="Doctor Profile">
                             <div class="prof_name">
-                                <h3><?php echo $row['dr_name']?></h3>
+                                <h3><?php echo 'Dr.'.$row['dr_name']?></h3>
                             </div>
                         </div>
                         </center>
