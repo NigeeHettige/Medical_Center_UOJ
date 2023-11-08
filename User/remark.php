@@ -153,7 +153,7 @@
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
                                     <td  data-label = "time"><?php if(isset($row)){echo $row['doctor'];}?></td>
                                     <td  data-label = "docname"><?php if(isset($row)){echo $row['cause'];} ?></td>
-                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup()"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup(<?php echo $row['id']?>)"><i class="fa-solid fa-eye"></i></a></td>
                                     
                                 </tr>
                                <?php }}?>
@@ -246,11 +246,12 @@ $(function(){
 
 
 //popup login
-    function viewPopup(){
+    function viewPopup(appoinment_id){
         var blur = document.getElementById('blur');
         blur.classList.toggle('active');
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
+        document.querySelector('input[name="appoinment_id"]').value = appoinment_id;
     }
 
     function closeviewPopup(){
@@ -272,14 +273,19 @@ $(function(){
             <div class="close-btn" onclick="closeviewPopup()">&times;</div>
             <div class="form">
                 <h2>Remark</h2>
+                    
                     <form action="" method="POST">
+                    
+                    <div class="form-element">
+                        <input type="text" name="appoinment_id" id="appoinment_id" readonly>
+                    </div>
                     <div class="form-element">
                         <label for="cause" >Cause</label>
-                        <input type="text" placeholder="fever" readonly>
+                        <input type="text" value="<?php ?>" readonly>
                     </div>
                     <div class="form-element">
                         <label for="regno" >Prescription Details</label>
-                        <textarea rows='15'></textarea>
+                        <textarea rows='15' readonly></textarea>
                     </div>
                 </form>
 

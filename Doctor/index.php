@@ -7,6 +7,18 @@
         header('location: login.php');
     }
 
+    if(isset($_POST['prescription_submit'])){
+        $cause = $_POST['cause'];
+        $prescription = $_POST['prescription'];
+        $appoinment_id = $_POST['appoinment_id'];
+
+        $query3 = "UPDATE bookings SET cause='$cause',remark='$prescription',status='done' WHERE id = '$appoinment_id'";
+        $result3 = mysqli_query($connection,$query3);
+        if($result3){
+            echo "<script>alert('Prescription Submitted!')</script>";
+        }
+    }
+
     if(isset($_GET['action'])){
         if($_GET['action']=='logout'){
             session_unset();
@@ -66,13 +78,13 @@
                </li> 
 
 
-               <li>
+               <!-- <li>
                 <a href="feedback.php">
                     <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Schedule</span>
                 </a>
-               </li> 
+               </li>  -->
 
 
                <!-- <li>
@@ -140,8 +152,15 @@
     
     
                     <div class="card2">
+                        <?php
+                        $query1 = "SELECT * FROM bookings WHERE doctor ='$id' AND date = CURDATE()";
+                        $result1 = mysqli_query($connection,$query1);
+                        if($result1){
+                            $num_rows = mysqli_num_rows($result1);
+                        }
+                        ?>
                         <div>
-                            <div class="numbers" >10</div>
+                            <div class="numbers" ><?php echo $num_rows; ?></div>
                             <div class="cardName">Today's Appoinment</div>
                         </div>
                         <div class="iconBx">
@@ -152,7 +171,10 @@
     
                     <div class="card3" id="date">
                         <div>
-                            <div class="numbers" >14<sup class="sup">th</sup><span > December</span></div>
+                            <?php
+                            $today = date('j<\s\u\p class="sup">S</\s\u\p> F');
+                            echo '<div class="numbers">' . $today . '</div>';
+                            ?>
                             <div class="cardName">Date</div>
                         </div>
                         <div class="iconBx">
@@ -181,16 +203,29 @@
                                 </tr>
                             </thead>
     
+                        
                             <tbody>
+                            <?php
+                              $query2 = "SELECT * FROM bookings WHERE doctor ='$id'";
+                              $result2 = mysqli_query($connection,$query2);
+                              if($result2){
+                                while($row = mysqli_fetch_assoc($result2)){
+                            ?>    
+                              
+                            
+                              
                                 <tr>
-                                    <td  data-label = "regNo">2020/CCS/068</td>
-                                    <td  data-label = "name">Peshali Perera</td>
-                                    <td  data-label = "time">10.30am</td>
+                                    <td  data-label = "regNo"><?php echo $row['reg_number'];?></td>
+                                    <td  data-label = "name"><?php echo $row['name'];?></td>
+                                    <td  data-label = "time"><?php echo $row['time_slot'];?></td>
                                     <div class="act">
-                                        <td  data-label = "action"><a href="#" class="status1"><i class="fa-solid fa-check"></i></a></td>
+                                        <td  data-label = "action"><a href="#" class="status1" onclick="viewPopup(<?php echo $row['id']?>)"><i class="fa-solid fa-check"></i></a></td>
                                         <td  data-label = "action"><a href="#" class="status2"><i class="fa-solid fa-trash"></i></a></td>
                                     </div>
                                 </tr>
+                                <?php
+                              }}
+                              ?>
                             </tbody>
                         </table>
                     </div>
@@ -240,52 +275,20 @@ console.log("Script executed");
     }
 
 
-    // // for change status color
-
-
-    // document.addEventListener("DOMContentLoaded",function(){
-    //     const card2 = document.querySelector('.card2');
-    //     const statusElement = card2.querySelector('.numbers');
-    //     const status = statusElement.textContent.toLocaleLowerCase();
-        
-
-    //     if(status === 'active'){
-    //         card2.classList.add('active');
-    //         card2.style.backgroundColor = "rgb(95, 255, 164)";
-            
-    //     }else{
-    //         card2.classList.add('deactive');
-    //         card2.style.backgroundColor = "rgb(255, 95, 95";
-    //     }
-
-    
-    // });
-
-
-    
-//    for diabling date
 
 
 
 
-$(function(){
-    var arrayOfDates = ["25-08-2023","29-08-2023"];
 
-    $("input.datePicker").datepicker({
-        beforeShowDay: function(date){
-            var string = $.datepicker.formatDate("dd-mm-yy", date);  
-            return [arrayOfDates.indexOf(string) === -1]; 
-        }
-    });
-});
 
 
 //popup login
-    function viewPopup(){
+    function viewPopup(appoinment_id){
         var blur = document.getElementById('blur');
         blur.classList.toggle('active');
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
+        document.querySelector('input[name="appoinment_id"]').value = appoinment_id;
     }
 
     function closeviewPopup(){
@@ -301,5 +304,35 @@ $(function(){
 
 
     </script>
+
+     <!-- Make new appoinment -->
+     <div class="popup_form" id="popup_form">
+        <div class="popup" id="popup"   style="margin-top: 150px">
+            <div class="close-btn" onclick="closeviewPopup()">&times;</div>
+            <div class="form">
+                <h2>Remark</h2>
+                    <form action="" method="POST">
+                    <div class="form-element">
+                        <input type="hidden" name="appoinment_id" id="appoinment_id" readonly>
+                    </div>
+                    <div class="form-element">
+                        <label for="cause" >Cause</label>
+                        <input type="text" name="cause" placeholder="reason">
+                    </div>
+                    <div class="form-element">
+                        <label for="regno" >Prescription Details</label>
+                        <textarea rows='15' name='prescription'></textarea>
+                    </div>
+                    <div class="form-element">
+                    <button type="submit" name='prescription_submit'>Submit</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+        </div>
+        <!-- Make new appoinment end -->
 </body>
+  
 </html>

@@ -68,13 +68,13 @@
                </li> 
 
 
-               <li>
+               <!-- <li>
                 <a href="feedback.php">
                     <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
                     <span class="title"></span>
                     <span class="icon">Schedule</span>
                 </a>
-               </li> 
+               </li>  -->
 
 
                <!-- <li>

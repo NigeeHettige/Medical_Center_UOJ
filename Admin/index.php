@@ -15,13 +15,7 @@
         }
     }
 
-
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -125,8 +119,18 @@
                 <!-- cards -->
                 <div class="cardBox">
                     <div class="card1">
+                        <?php 
+
+                            $query = "SELECT * FROM doctor";
+                            $result = mysqli_query($connection,$query);
+                            if($result){
+                                $numOfDoctors = mysqli_num_rows($result);
+                            }
+                        
+                        
+                        ?>
                         <div>
-                            <div class="numbers">1</div>
+                            <div class="numbers"><?php echo $numOfDoctors?></div>
                             <div class="cardName">Doctors</div>
                         </div>
                         <div class="iconBx">
@@ -136,8 +140,17 @@
     
     
                     <div class="card2">
+                    <?php 
+
+                            $query = "SELECT * FROM user_details";
+                            $result = mysqli_query($connection,$query);
+                            if($result){
+                                $numOfUsers = mysqli_num_rows($result);
+                            }
+
+                    ?>
                         <div>
-                            <div class="numbers" >23</div>
+                            <div class="numbers" ><?php echo $numOfUsers?></div>
                             <div class="cardName">Users</div>
                         </div>
                         <div class="iconBx">
@@ -147,8 +160,17 @@
     
     
                     <div class="card3" id="date">
+                    <?php 
+
+                        $query = "SELECT * FROM bookings WHERE date=CURDATE()";
+                        $result = mysqli_query($connection,$query);
+                        if($result){
+                            $numOfToday = mysqli_num_rows($result);
+                        }
+
+                    ?>
                         <div>
-                            <div class="numbers" >12</div>
+                            <div class="numbers" ><?php echo $numOfToday?></div>
                             <div class="cardName">Today's Appoinments</div>
                         </div>
                         <div class="iconBx">
@@ -162,8 +184,8 @@
                 </div>
     
                 <!-- Appoinment details --> 
-                <div class="details">
-                    <div class="recentOrders">
+                <div class=" detailsadmin">
+                    <div class="recentOrdersadmin">
                         <div class="cardHeader">
                             <h2>Today's  Appoinments</h2>
                         </div>
@@ -179,13 +201,34 @@
                             </thead>
     
                             <tbody>
-                                <tr>
-                                    <td  data-label = "regNo">2020/CCS/068</td>
-                                    <td  data-label = "name">Peshali Perera</td>
-                                    <td  data-label = "time">10.30am</td>
-                                    <td  data-label = "name">Doc Name</td>
-                                   
-                                </tr>
+
+                                <?php 
+                                
+                                    $query = "SELECT * FROM bookings WHERE date=CURDATE() ORDER BY time_slot";
+                                    $result = mysqli_query($connection,$query);
+                                    if($result){
+
+                                        while($row=mysqli_fetch_assoc($result)){
+                                        
+                                            ?>
+                                        <tr style="height:40px">
+                                            <td  data-label = "regNo"><?php echo $row['reg_number']?></td>
+                                            <td  data-label = "name"><?php echo $row['name']?></td>
+                                            <td  data-label = "time"><?php echo $row['time_slot']?></td>
+                                            <td  data-label = "name"><?php echo $row['doctor']?></td>
+                                           
+                                        </tr>
+
+                                        <?php 
+
+                                        }
+
+
+                                    }
+                                
+                                ?>
+
+                                
                             </tbody>
                         </table>
                     </div>

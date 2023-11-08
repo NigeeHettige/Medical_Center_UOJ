@@ -206,6 +206,8 @@
                                 $result = mysqli_query($connection,$query);
                                 if($result){
                                     while($row = mysqli_fetch_assoc($result)){
+                                        $rowDoctor = $row['doctor'];
+                                        $queryInside = "SELECT dr_name FROM doctor,bookings WHERE "
                             ?>
                                 
                                 <tr style="height: 50px;">
