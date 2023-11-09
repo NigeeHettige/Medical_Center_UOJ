@@ -145,7 +145,7 @@
                                             FROM bookings
                                             INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
                                             WHERE bookings.reg_number = '$regNo'
-                                            AND bookings.date = CURDATE()
+                                            AND bookings.status='done'
                                             ORDER BY bookings.date, bookings.time_slot DESC";
                                 $result = mysqli_query($connection,$query);
                                 if($result){
@@ -159,7 +159,7 @@
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
                                     <td  data-label = "time"><?php if(isset($row)){echo $row['dr_name'];}?></td>
                                     <td  data-label = "docname"><?php if(isset($row)){echo $row['cause'];} ?></td>
-                                    <td  data-label = "action"><a href="" class="remark" onclick="viewPopup(<?php echo $row['id']?>,<?php echo $row['cause']?>,<?php echo $row['remark']?>)"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup(<?php echo $row['id']?>,<?php echo $row['cause']?>,<?php echo $row['remark']?>)"><i class="fa-solid fa-eye"></i></a></td>
                                     
                                 </tr>
                                <?php }}?>

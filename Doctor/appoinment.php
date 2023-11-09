@@ -199,7 +199,7 @@
 
 
     <!-- Make new appoinment -->
-    <div class="popup_form" id="popup_form">
+    <!-- <div class="popup_form" id="popup_form">
         <div class="popup" id="popup">
             <div class="close-btn" onclick="closeviewPopup()">&times;</div>
             <div class="form">
@@ -254,7 +254,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Make new appoinment end -->
 
 

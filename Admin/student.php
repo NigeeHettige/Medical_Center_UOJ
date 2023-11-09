@@ -15,8 +15,31 @@
         }
     }
 
-?>
-
+    function setValue($name){
+        if(isset($_POST['$name'])){
+            echo $_POST[$name];
+        }
+    }
+    if(isset($_POST['search'])){
+        $reg_number = $_POST['reg_number'];
+        $query2 = "SELECT * FROM user_details WHERE reg_number='$reg_number'";
+        $result2 = mysqli_query($connection,$query2);
+        if($result2){
+            $numOfrows = mysqli_num_rows($result2);
+            if($numOfrows ==1){
+                ?> 
+                <script type="text/javascript">window.open('student_prof/studprof.php?reg_number=<?php echo $reg_number ?>', '_blank')</script>
+            <?php
+            }else{
+            ?>
+                <script type="text/javascript">alert('User not found');</script>
+            
+            <?php
+            }
+            }
+        }
+        ?>
+     
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +47,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Health Center</title>
-    <link rel="stylesheet" href="../CSS/main.css">
+    <link rel="stylesheet" href="student.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
@@ -124,21 +147,20 @@
                     <div class="popup" id="popup"   style="margin-top: 150px">
                         
                         <div class="form">
-                            <h2>Remark</h2>
+                            <h2>Find Student</h2>
                                 
                                 <form action="" method="POST">
                                 
                                 <div class="form-element">
-                                    <input type="text" name="appoinment_id" id="appoinment_id" readonly>
+                                    <label for="cause" >Registration Number</label>
+                                    <input type="text" name="reg_number" id="appoinment_id" value="<?php setValue('reg_number') ?>">
                                 </div>
+                             
                                 <div class="form-element">
-                                    <label for="cause" >Cause</label>
-                                    <input type="text" value="<?php ?>" readonly>
+                                    <button type="submit" name='search'>Search</button>
                                 </div>
-                                <div class="form-element">
-                                    <label for="regno" >Prescription Details</label>
-                                    <textarea rows='15' readonly></textarea>
-                                </div>
+             
+                               
                             </form>
 
 
