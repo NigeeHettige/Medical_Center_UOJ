@@ -151,7 +151,7 @@
                                         <tbody>
                                             <?php 
                                                 $dr_id = $row['dr_id'];
-                                                $query1 = "SELECT * FROM bookings WHERE doctor='$dr_id'";
+                                                $query1 = "SELECT * FROM bookings WHERE dr_id='$dr_id'";
                                                 $result2 = mysqli_query($connection,$query1);
                                                 if($result2){
                                                     while($row1 = mysqli_fetch_assoc($result2)){

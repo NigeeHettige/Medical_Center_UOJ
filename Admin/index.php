@@ -204,7 +204,12 @@
 
                                 <?php 
                                 
-                                    $query = "SELECT * FROM bookings WHERE date=CURDATE() ORDER BY time_slot";
+                                    // $query = "SELECT * FROM bookings WHERE date=CURDATE() ORDER BY time_slot";
+                                    $query = "SELECT bookings.reg_number, bookings.name, bookings.time_slot, doctor.dr_name
+                                            FROM bookings
+                                            INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
+                                            AND bookings.date = CURDATE()
+                                            ORDER BY bookings.time_slot";
                                     $result = mysqli_query($connection,$query);
                                     if($result){
 
@@ -215,7 +220,7 @@
                                             <td  data-label = "regNo"><?php echo $row['reg_number']?></td>
                                             <td  data-label = "name"><?php echo $row['name']?></td>
                                             <td  data-label = "time"><?php echo $row['time_slot']?></td>
-                                            <td  data-label = "name"><?php echo $row['doctor']?></td>
+                                            <td  data-label = "name"><?php echo $row['dr_name']?></td>
                                            
                                         </tr>
 

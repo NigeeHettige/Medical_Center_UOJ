@@ -28,6 +28,18 @@
         }
     }
 
+    if(isset($_GET['appoinment_id']) && isset($_GET['action'])){
+
+        $appoinment_id = $_GET['appoinment_id'];
+        $query = "DELETE FROM bookings WHERE id='$appoinment_id'";
+        $result = mysqli_query($connection,$query);
+        if($result){
+            echo "<script>alert('appoiment deleted!')</script>";
+            header('location: index.php');
+        }
+
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -135,7 +147,7 @@
                                     <?php 
                                     
                                     $id = $_SESSION['dr_id'];
-                                    $query = "SELECT * FROM bookings WHERE doctor = '$id'";
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id'";
                                     $result = mysqli_query($connection,$query);
                                     $numOfRows = mysqli_num_rows($result);     
                                 
@@ -153,7 +165,7 @@
     
                     <div class="card2">
                         <?php
-                        $query1 = "SELECT * FROM bookings WHERE doctor ='$id' AND date = CURDATE()";
+                        $query1 = "SELECT * FROM bookings WHERE dr_id ='$id' AND date = CURDATE()";
                         $result1 = mysqli_query($connection,$query1);
                         if($result1){
                             $num_rows = mysqli_num_rows($result1);
@@ -206,7 +218,7 @@
                         
                             <tbody>
                             <?php
-                              $query2 = "SELECT * FROM bookings WHERE doctor ='$id'";
+                              $query2 = "SELECT * FROM bookings WHERE dr_id ='$id' AND date=CURDATE()";
                               $result2 = mysqli_query($connection,$query2);
                               if($result2){
                                 while($row = mysqli_fetch_assoc($result2)){
@@ -220,7 +232,7 @@
                                     <td  data-label = "time"><?php echo $row['time_slot'];?></td>
                                     <div class="act">
                                         <td  data-label = "action"><a href="#" class="status1" onclick="viewPopup(<?php echo $row['id']?>)"><i class="fa-solid fa-check"></i></a></td>
-                                        <td  data-label = "action"><a href="#" class="status2"><i class="fa-solid fa-trash"></i></a></td>
+                                        <td  data-label = "action"><a href="?appoinment_id=<?php echo $row['id']?>&action=delete" class="status2"><i class="fa-solid fa-trash"></i></a></td>
                                     </div>
                                 </tr>
                                 <?php

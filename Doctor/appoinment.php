@@ -16,6 +16,18 @@
         }
     }
 
+    if(isset($_GET['appoinment_id']) && isset($_GET['action'])){
+
+        $appoinment_id = $_GET['appoinment_id'];
+        $query = "DELETE FROM bookings WHERE id='$appoinment_id'";
+        $result = mysqli_query($connection,$query);
+        if($result){
+            echo "<script>alert('appoiment deleted!')</script>";
+            header('location: appoinment.php');
+        }
+
+    }
+
 ?>
 
 
@@ -145,7 +157,7 @@
                                 <?php 
                                     
                                     $id = $_SESSION['dr_id'];
-                                    $query = "SELECT * FROM bookings WHERE doctor = '$id'";
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id'";
                                     $result = mysqli_query($connection,$query);
                                     if($result){
 
@@ -157,7 +169,7 @@
                                                     <td><?php echo $row['reg_number']?></td>
                                                     <td><?php echo $row['name']?></td>
                                                     <td><?php echo $row['time_slot']?></td>
-                                                    <td ><a href="#" class="status" ><i class="fa-solid fa-trash"></i></a></td>
+                                                    <td ><a href="?appoinment_id=<?php echo $row['id']?>&action=delete" class="status" ><i class="fa-solid fa-trash"></i></a></td>
                                                     
                                                 </tr>
                                             <?php

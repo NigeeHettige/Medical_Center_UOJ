@@ -38,8 +38,10 @@ if (isset($_POST['first_next'])) {
         $tel = $_POST['tel'];
         $password = password_hash($_POST['password'],PASSWORD_DEFAULT);
         $confirm_password = $_POST['confirm_password'];
+        $profile_photo = '../../images/default_profile.jpg';
 
-        $query = "INSERT INTO user_details (reg_number,full_name,name_with_initials,gender,dob,mobile_number,email,residential_address,permenent_address,nic,martial_status,faculty,department,height,weight,gardian_name,relation,contact_number,password) VALUES ('$reg_no','$full_name','$ini_name','$gender','$dob','$mobile','$email','$r_address','$p_address','$nic','$martial_status','$faculty','$department','$height','$weight','$g_name','$rel','$tel','$password')";
+        $query = "INSERT INTO user_details (reg_number,full_name,name_with_initials,gender,dob,mobile_number,email,residential_address,permenent_address,nic,martial_status,faculty,department,height,weight,gardian_name,relation,contact_number,password,profile_photo) VALUES ('$reg_no','$full_name','$ini_name','$gender','$dob','$mobile','$email','$r_address','$p_address','$nic','$martial_status','$faculty','$department','$height','$weight','$g_name','$rel','$tel','$password','$profile_photo')";
+        
         $result = mysqli_query($connection,$query);
         if($result){
             echo "<script>alert('Insertion Success'); window.location.href = '../../home.php';</script> ";

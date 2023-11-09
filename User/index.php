@@ -202,18 +202,23 @@
 
                             <?php
                                 $regNo = $_SESSION['reg_num'];
-                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE()  ORDER BY date,time_slot LIMIT 1";
+                                // $query = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date = CURDATE()  ORDER BY date,time_slot LIMIT 1";
+                                $query = "SELECT bookings.id, bookings.date, bookings.time_slot, doctor.dr_name
+                                            FROM bookings
+                                            INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
+                                            WHERE bookings.reg_number = '$regNo'
+                                            AND bookings.date = CURDATE()
+                                            ORDER BY bookings.date, bookings.time_slot LIMIT 1";
                                 $result = mysqli_query($connection,$query);
                                 if($result){
                                     while($row = mysqli_fetch_assoc($result)){
-                                        $rowDoctor = $row['doctor'];
-                                        $queryInside = "SELECT dr_name FROM doctor,bookings WHERE "
+                                        
                             ?>
                                 
                                 <tr style="height: 50px;">
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
                                     <td  data-label = "time"><?php if(isset($row)){echo $row['time_slot'];} ?></td>
-                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['doctor'];} ?></td>
+                                    <td  data-label = "docname"><?php if(isset($row)){echo $row['dr_name'];} ?></td>
                                     <td  data-label = "action"><a href="?action=appoinment_delete&id=<?php echo $row['id'] ?>" class="status"><i class="fa-solid fa-trash"></i></a></td>
                                 </tr>  
                 

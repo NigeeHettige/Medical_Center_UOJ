@@ -140,7 +140,13 @@
                             <?php
                                 $regNo = $_SESSION['reg_num'];
                                 
-                                $query = "SELECT * FROM bookings WHERE reg_number = '$regNo'  ORDER BY date,time_slot  DESC";
+                                // $query = "SELECT * FROM bookings WHERE reg_number = '$regNo'  ORDER BY date,time_slot  DESC";
+                                $query = "SELECT bookings.id, bookings.date, bookings.time_slot, bookings.cause,bookings.remark, doctor.dr_name
+                                            FROM bookings
+                                            INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
+                                            WHERE bookings.reg_number = '$regNo'
+                                            AND bookings.date = CURDATE()
+                                            ORDER BY bookings.date, bookings.time_slot DESC";
                                 $result = mysqli_query($connection,$query);
                                 if($result){
                                    
@@ -151,9 +157,9 @@
                                 <tr>
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['id'];} ?></td>
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
-                                    <td  data-label = "time"><?php if(isset($row)){echo $row['doctor'];}?></td>
+                                    <td  data-label = "time"><?php if(isset($row)){echo $row['dr_name'];}?></td>
                                     <td  data-label = "docname"><?php if(isset($row)){echo $row['cause'];} ?></td>
-                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup(<?php echo $row['id']?>)"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td  data-label = "action"><a href="" class="remark" onclick="viewPopup(<?php echo $row['id']?>,<?php echo $row['cause']?>,<?php echo $row['remark']?>)"><i class="fa-solid fa-eye"></i></a></td>
                                     
                                 </tr>
                                <?php }}?>
@@ -246,12 +252,16 @@ $(function(){
 
 
 //popup login
-    function viewPopup(appoinment_id){
+    function viewPopup(appoinment_id,cause,prescription){
+        console.log('called');
         var blur = document.getElementById('blur');
         blur.classList.toggle('active');
         var popup = document.getElementById('popup');
         popup.classList.toggle('active');
         document.querySelector('input[name="appoinment_id"]').value = appoinment_id;
+        document.querySelector('input[name="cause"]').value = cause;
+        document.querySelector('textarea[name="prescription"]').value = prescription;
+        console.log('end');
     }
 
     function closeviewPopup(){
@@ -281,11 +291,11 @@ $(function(){
                     </div>
                     <div class="form-element">
                         <label for="cause" >Cause</label>
-                        <input type="text" value="<?php ?>" readonly>
+                        <input type="text" name="cause" readonly>
                     </div>
                     <div class="form-element">
                         <label for="regno" >Prescription Details</label>
-                        <textarea rows='15' readonly></textarea>
+                        <textarea rows='15' name="prescription" readonly></textarea>
                     </div>
                 </form>
 

@@ -24,8 +24,77 @@
         }
     }
 
+    if(isset($_POST['update_profile'])){
+
+        $mobile_number = $_POST['mobile_number'];
+        $residential_address = $_POST['residential_address'];
+        $permenent_address = $_POST['permenent_address'];
+        $martial_status = $_POST['martial_status'];
+        $gardian_name = $_POST['gardian_name'];
+        $relation = $_POST['relation'];
+        $contact_number = $_POST['contact_number'];
+        $height = $_POST['height'];
+        $weight = $_POST['weight'];
+        $blood_group = $_POST['blood_group'];
+        $last_school_attend = $_POST['last_school_attend'];
+
+            $file = $_FILES['file'];
+
+            $fileName = $_FILES['file']['name'];
+            $fileTempName = $_FILES['file']['tmp_name'];
+            $fileError = $_FILES['file']['error'];
+            $fileSize = $_FILES['file']['size'];
+            $fileType = $_FILES['file']['type'];
+
+            $fileExt = explode('.',$fileName);
+            $actualFileExt = strtolower(end($fileExt));
+
+            $allowed = array('jpg','jpeg','png');
+
+            if(in_array($actualFileExt,$allowed)){
+
+                if($fileError === 0){
+
+                    if($fileSize < 1000000){
+                        
+                        $reg_num = $_SESSION['reg_num'];
+
+                        $fileNameNew = $_SESSION['reg_num'].'.'.$actualFileExt;
+                        $filePath = '../uploads/'.$fileNameNew;
+                        $queryInside = "SELECT * FROM user_details WHERE reg_number = '$reg_num'";
+                        $resultInside = mysqli_query($connection,$queryInside);
+                        if($resultInside){
+                            $rowInside = mysqli_fetch_assoc($resultInside);
+                            // echo $rowInside['profile_photo'];
+                            // echo "<br>";
+                            // echo '../uploads/'.$_SESSION['reg_num'].'.jpg';
+                            if($rowInside['profile_photo'] == $filePath){
+                                unlink($filePath);
+                            }
+                        }
+                        move_uploaded_file($fileTempName,$filePath);
+
+                        $query = "UPDATE user_details set mobile_number='$mobile_number',residential_address='$residential_address',permenent_address='$permenent_address',martial_status='$martial_status',gardian_name='$gardian_name',relation='$relation',contact_number='$contact_number',height='$height',weight='$weight',blood_group='$blood_group',last_school_attend='$last_school_attend',profile_photo='$filePath' WHERE reg_number='$reg_num'";
+                        $result = mysqli_query($connection,$query);
+                        if($result){
+                            echo "<script>alert('Phofile is updated!')</script>";
+                            // header("location: user.php");
+                        }
 
 
+                    } else {
+                        echo "<script>alert('File Size Exceeded!')</script>";
+                    }
+
+                } else {
+                    echo "<script>alert('File Error!')</script>";
+                }
+
+            } else {
+                echo "<script>alert('Unsupported File Format!')</script>";
+            }
+
+    }
 
 ?>
 
@@ -42,12 +111,13 @@
     <link  href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </head>
 <body>
+    <form action="" method="POST" enctype="multipart/form-data">
     <div class="container rounded bg-white mt-5 mb-5">
         <div class="row">
             <div class="col-md-3 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" height="150px"src="<?php if(isset($row)){echo $row['profile_photo'];}?>">
                 <div class="d-flex justify-content-between align-items-center experience">
-                    <input type="file" id="file_upload" hidden>
+                    <input type="file" name='file' id="file_upload" hidden>
                     <label for="file_upload" class="btn btn-primary profile-button" style="background-color: white; color: black; border-color: black; padding: 2px 10px; margin-bottom: 10px;">Upload</label>
                     
                 </div>
@@ -122,15 +192,15 @@
                     <div class="row mt-3">
                         <div class="col-md-6">
                             <label class="labels">Height</label>
-                            <input type="text" class="form-control"value="<?php if(isset($row)){echo $row['height'];} else {setValue('height');} ?>">
+                            <input type="text" class="form-control" name="height" value="<?php if(isset($row)){echo $row['height'];} else {setValue('height');} ?>">
                         </div>
                         <div class="col-md-6">
                             <label class="labels">Weight</label>
-                            <input type="text" class="form-control" value="<?php if(isset($row)){echo $row['weight'];} else {setValue('weight');}?>">
+                            <input type="text" class="form-control" name="weight" value="<?php if(isset($row)){echo $row['weight'];} else {setValue('weight');}?>">
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <button class="btn btn-primary profile-button" type="button">Update Profile</button>
+                        <button class="btn btn-primary profile-button" type="submit" name="update_profile">Update Profile</button>
                     </div>
                 </div>
             </div>
@@ -139,11 +209,11 @@
                     <div class="d-flex justify-content-between align-items-center experience"><span>More Information</span></div><br>
                     <div class="col-md-12">
                         <label class="labels">Blood Group</label>
-                        <input type="text" class="form-control" placeholder="ex: A+" name="blood_group" value="<?php setValue('blood_group')?>">
+                        <input type="text" class="form-control" placeholder="ex: A+" name="blood_group" value="<?php if(isset($row)){echo $row['blood_group'];} else {setValue('blood_group');}?>">
                     </div> <br>
                     <div class="col-md-12">
                         <label class="labels">Last School Attend</label>
-                        <input type="text" class="form-control" placeholder="ex: Visaka Vidyalaya" name="last_school_attend" value="<?php setValue('last_school_attend')?>">
+                        <input type="text" class="form-control" placeholder="ex: Visaka Vidyalaya" name="last_school_attend" value="<?php if(isset($row)){echo $row['last_school_attend'];} else {setValue('last_school_attend');}?>">
                     </div>
                 </div>
                 <div class="p-3 py-5">
@@ -160,8 +230,9 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+    <!-- </div>
+    </div> -->
+    </form>
 
     <script>    
 
