@@ -1,19 +1,31 @@
 <?php
 
-include('..\connection.php');
+    include('..\connection.php');
 
-session_start();
-if (!isset($_SESSION['username'])) {
-    header("location: login/login.php");
-}
-
-if (isset($_GET['action'])) {
-    if ($_GET['action'] == 'signout') {
-        session_unset();
-        session_destroy();
+    session_start();
+    if (!isset($_SESSION['username'])) {
         header("location: login/login.php");
     }
-}
+
+    if (isset($_GET['action'])) {
+        if ($_GET['action'] == 'signout') {
+            session_unset();
+            session_destroy();
+            header("location: login/login.php");
+        }
+    }
+
+    if(isset($_GET['appoinment_id']) && isset($_GET['action'])){
+        $appoinment_id = $_GET['appoinment_id'];
+
+        $queryDelete = "DELETE FROM bookings WHERE id='$appoinment_id'";
+        $deleteResult = mysqli_query($connection,$queryDelete);
+        if($deleteResult){
+            echo "<script>alert('Deletion successful!')</script>";
+        }
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -153,7 +165,7 @@ if (isset($_GET['action'])) {
                                             FROM bookings
                                             INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
                                             WHERE bookings.reg_number = '$regNo'
-                                            AND bookings.date = CURDATE()
+                                            AND bookings.status = ''
                                             ORDER BY bookings.date, bookings.time_slot";
 
                                 $result = mysqli_query($connection, $query);
@@ -183,7 +195,7 @@ if (isset($_GET['action'])) {
                                                     echo $row['dr_name'];
                                                 } ?>
                                             </td>
-                                            <td data-label="action"><a href="#" class="status"><i
+                                            <td data-label="action"><a href="?appoinment_id=<?php echo $row['id']?>&action=delete" class="status"><i
                                                         class="fa-solid fa-trash"></i></a></td>
 
                                         </tr>

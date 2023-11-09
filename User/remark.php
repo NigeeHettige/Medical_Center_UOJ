@@ -159,7 +159,7 @@
                                     <td  data-label = "id"><?php if(isset($row)){echo $row['date'];} ?></td>
                                     <td  data-label = "time"><?php if(isset($row)){echo $row['dr_name'];}?></td>
                                     <td  data-label = "docname"><?php if(isset($row)){echo $row['cause'];} ?></td>
-                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup(<?php echo $row['id']?>,<?php echo $row['cause']?>,<?php echo $row['remark']?>)"><i class="fa-solid fa-eye"></i></a></td>
+                                    <td  data-label = "action"><a href="#" class="remark" onclick="viewPopup('<?php echo htmlspecialchars($row['id'], ENT_QUOTES, 'UTF-8')?>', '<?php echo htmlspecialchars($row['cause'], ENT_QUOTES, 'UTF-8')?>', '<?php echo htmlspecialchars($row['remark'], ENT_QUOTES, 'UTF-8')?>')"><i class="fa-solid fa-eye"></i></a></td>
                                     
                                 </tr>
                                <?php }}?>
@@ -291,11 +291,11 @@ $(function(){
                     </div>
                     <div class="form-element">
                         <label for="cause" >Cause</label>
-                        <input type="text" name="cause" readonly>
+                        <input type="text" name="cause" id="cause" readonly>
                     </div>
                     <div class="form-element">
                         <label for="regno" >Prescription Details</label>
-                        <textarea rows='15' name="prescription" readonly></textarea>
+                        <textarea rows='15' name="prescription" id="prescription" readonly></textarea>
                     </div>
                 </form>
 

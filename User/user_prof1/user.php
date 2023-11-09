@@ -96,6 +96,36 @@
 
     }
 
+    if(isset($_POST['password_change'])){
+        $currentPassword = $_POST['current_password'];
+        $newPassword = $_POST['new_password'];
+        $confirmNewPassword = $_POST['confirm_new_password'];
+        $reg_number = $_SESSION['reg_num'];
+        $queryPassword = "SELECT password FROM user_details WHERE reg_number = '$reg_number'";
+        $resultPassword = mysqli_query($connection,$queryPassword);
+        if($resultPassword){
+            $row1 = mysqli_fetch_assoc($resultPassword);
+            // echo $row['password'];
+            if(password_verify($currentPassword,$row1['password'])){
+
+                if($newPassword === $confirmNewPassword){
+                    $newHashedPassword = password_hash($newPassword,PASSWORD_DEFAULT);
+                    $queryFinal = "UPDATE user_details SET password='$newHashedPassword' WHERE reg_number='$reg_number'";
+                    $resultFinal = mysqli_query($connection,$queryFinal);
+                    if($resultFinal){
+                        echo "<script>alert('Password Changed!')</script>";
+                    }
+
+ 
+                } else {    
+                    echo "<script>alert('Password mismatch!')</script>";
+                }
+
+            } else {
+                echo "<script>alert('Invalid Password!')</script>";
+            }
+        }
+    }   
 ?>
 
 
@@ -118,7 +148,7 @@
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" height="150px"src="<?php if(isset($row)){echo $row['profile_photo'];}?>">
                 <div class="d-flex justify-content-between align-items-center experience">
                     <input type="file" name='file' id="file_upload" hidden>
-                    <label for="file_upload" class="btn btn-primary profile-button" style="background-color: white; color: black; border-color: black; padding: 2px 10px; margin-bottom: 10px;">Upload</label>
+                    <label for="file_upload" class="btn btn-primary profile-button" style="background-color: white; color: black; border-color: black; padding: 2px 10px; margin: 15px 0px;">Upload</label>
                     
                 </div>
                 <span id="file-chosen"></span>
@@ -218,14 +248,23 @@
                 </div>
                 <div class="p-3 py-5">
                     <div class="d-flex justify-content-between align-items-center experience"><span>Change Password</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Change</span></div><br>
-                    <div class="col-md-12">
-                        <label class="labels">Current Password</label>
-                        <input type="password" class="form-control"  value="">
-                    </div> <br>
-                    <div class="col-md-12">
-                        <label class="labels">New Password</label>
-                        <input type="password" class="form-control"  value="">
-                    </div>
+                    <form action="" method="POST">
+                        <div class="col-md-12">
+                            <label class="labels">Current Password</label>
+                            <input type="password" name="current_password" class="form-control"  value="<?php setValue('')?>">
+                        </div> <br>
+                        <div class="col-md-12">
+                            <label class="labels">New Password</label>
+                            <input type="password" name="new_password" class="form-control"  value="<?php setValue('')?>">
+                        </div><br>
+                        <div class="col-md-12">
+                            <label class="labels">Confirm New Password</label>
+                            <input type="password" name="confirm_new_password" class="form-control"  value="<?php setValue('')?>">
+                        </div>
+                        <div class="mt-5 text-center">
+                            <button class="btn btn-primary profile-button" type="submit" name="password_change">Change Password</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
