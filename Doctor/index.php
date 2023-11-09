@@ -147,7 +147,7 @@
                                     <?php 
                                     
                                     $id = $_SESSION['dr_id'];
-                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id' AND date=CURDATE()";
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id' AND date=CURDATE() AND status=''";
                                     $result = mysqli_query($connection,$query);
                                     $numOfRows = mysqli_num_rows($result);     
                                 
@@ -224,7 +224,7 @@
                                 while($row = mysqli_fetch_assoc($result2)){
                             ?>    
                               
-                                <tr>
+                                <tr style='height:50px'>
                                     <td  data-label = "regNo"><?php echo $row['reg_number'];?></td>
                                     <td  data-label = "name"><?php echo $row['name'];?></td>
                                     <td  data-label = "time"><?php echo $row['time_slot'];?></td>

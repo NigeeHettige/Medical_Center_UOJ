@@ -165,7 +165,7 @@
                                             FROM bookings
                                             INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
                                             WHERE bookings.reg_number = '$regNo'
-                                            AND bookings.status = ''
+                                            AND bookings.status = '' AND date >= CURDATE()
                                             ORDER BY bookings.date, bookings.time_slot";
 
                                 $result = mysqli_query($connection, $query);
