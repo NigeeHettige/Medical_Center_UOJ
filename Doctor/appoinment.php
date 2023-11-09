@@ -136,8 +136,8 @@
                 <!-- <a href="#" class="status2" onclick="viewPopup()">New Appoinment <ion-icon name="add-circle-outline"></ion-icon></a> -->
              
                 <!-- current active appoinment  -->
-                <div class="details1 details">
-                    <div class="recentOrders1">
+                <div class="detailsadmin" style="display: block; margin-left:80px; margin-bottom:40px">
+                    <div class="recentOrdersadmin">
                         <div class="cardHeader1">
                             <h2>Current Active Appoinment</h2>
                         </div>
@@ -191,8 +191,8 @@
                  <!-- current active appoinment end -->
                                     
                   <!-- current active appoinment  -->
-                <div class="details1 details">
-                    <div class="recentOrders1">
+                <div class="detailsadmin" style="display: block; margin-left:80px">
+                    <div class="recentOrdersadmin">
                         <div class="cardHeader1">
                             <h2>Closed Appoinment</h2>
                         </div>

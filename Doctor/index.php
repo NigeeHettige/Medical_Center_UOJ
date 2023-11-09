@@ -200,8 +200,8 @@
                 </div>
     
                 <!-- Appoinment details --> 
-                <div class="details">
-                    <div class="recentOrders">
+                <div class=" detailsadmin">
+                    <div class="recentOrdersadmin">
                         <div class="cardHeader">
                             <h2>Today's Appoinment</h2>
                         </div>
