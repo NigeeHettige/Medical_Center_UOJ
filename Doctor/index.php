@@ -147,7 +147,7 @@
                                     <?php 
                                     
                                     $id = $_SESSION['dr_id'];
-                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id'";
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id' AND date=CURDATE()";
                                     $result = mysqli_query($connection,$query);
                                     $numOfRows = mysqli_num_rows($result);     
                                 
@@ -155,7 +155,7 @@
 
                         <div>
                             <div class="numbers"><?php echo $numOfRows?></div>
-                            <div class="cardName">Total Appoinments</div>
+                            <div class="cardName">Today's Appoinments</div>
                         </div>
                         <div class="iconBx">
                             <ion-icon name="happy-outline"></ion-icon>
@@ -165,7 +165,7 @@
     
                     <div class="card2">
                         <?php
-                        $query1 = "SELECT * FROM bookings WHERE dr_id ='$id' AND date = CURDATE()";
+                        $query1 = "SELECT * FROM bookings WHERE dr_id ='$id' AND date = CURDATE() AND status='done'";
                         $result1 = mysqli_query($connection,$query1);
                         if($result1){
                             $num_rows = mysqli_num_rows($result1);
@@ -173,7 +173,7 @@
                         ?>
                         <div>
                             <div class="numbers" ><?php echo $num_rows; ?></div>
-                            <div class="cardName">Today's Appoinment</div>
+                            <div class="cardName">Closed Appoinment</div>
                         </div>
                         <div class="iconBx">
                             <ion-icon name="accessibility-outline"></ion-icon>
@@ -218,13 +218,11 @@
                         
                             <tbody>
                             <?php
-                              $query2 = "SELECT * FROM bookings WHERE dr_id ='$id' AND date=CURDATE()";
+                              $query2 = "SELECT * FROM bookings WHERE date=CURDATE() AND status='' AND dr_id ='$id'";
                               $result2 = mysqli_query($connection,$query2);
                               if($result2){
                                 while($row = mysqli_fetch_assoc($result2)){
                             ?>    
-                              
-                            
                               
                                 <tr>
                                     <td  data-label = "regNo"><?php echo $row['reg_number'];?></td>

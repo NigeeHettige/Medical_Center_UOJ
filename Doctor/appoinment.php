@@ -146,6 +146,7 @@
                                 <tr>
                                     <td>Registration Number</td>
                                     <td>Name</td>
+                                    <td>Date</td>
                                     <td>Time</td> 
                                     <td>Action</td>
                                 </tr>
@@ -157,7 +158,7 @@
                                 <?php 
                                     
                                     $id = $_SESSION['dr_id'];
-                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id'";
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id' and status=''";
                                     $result = mysqli_query($connection,$query);
                                     if($result){
 
@@ -168,6 +169,7 @@
                                                 <tr>
                                                     <td><?php echo $row['reg_number']?></td>
                                                     <td><?php echo $row['name']?></td>
+                                                    <td><?php echo $row['date']?></td>
                                                     <td><?php echo $row['time_slot']?></td>
                                                     <td ><a href="?appoinment_id=<?php echo $row['id']?>&action=delete" class="status" ><i class="fa-solid fa-trash"></i></a></td>
                                                     
@@ -187,7 +189,61 @@
                     </div>
                 </div>
                  <!-- current active appoinment end -->
+                                    
+                  <!-- current active appoinment  -->
+                <div class="details1 details">
+                    <div class="recentOrders1">
+                        <div class="cardHeader1">
+                            <h2>Closed Appoinment</h2>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Registration Number</td>
+                                    <td>Name</td>
+                                    <td>Date</td>
+                                    <td>Time</td> 
+                                    <!-- <td>Action</td> -->
+                                </tr>
+                                
+                            </thead>
 
+                            <tbody>
+
+                                <?php 
+                                    
+                                    $id = $_SESSION['dr_id'];
+                                    $query = "SELECT * FROM bookings WHERE dr_id = '$id' and status='done'";
+                                    $result = mysqli_query($connection,$query);
+                                    if($result){
+
+                                        while($row=mysqli_fetch_assoc($result)){
+
+                                            ?>
+
+                                                <tr>
+                                                    <td><?php echo $row['reg_number']?></td>
+                                                    <td><?php echo $row['name']?></td>
+                                                    <td><?php echo $row['date']?></td>
+                                                    <td><?php echo $row['time_slot']?></td>
+                                                    <!-- <td ><a href="?appoinment_id=<?php echo $row['id']?>&action=delete" class="status" ><i class="fa-solid fa-trash"></i></a></td> -->
+                                                    
+                                                </tr>
+                                            <?php
+
+                                        }
+
+                                    }        
+                                
+                                ?>
+
+                                
+                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                 <!-- current active appoinment end -->
 
             </section>
             <!-- Appoinment section ends -->         
