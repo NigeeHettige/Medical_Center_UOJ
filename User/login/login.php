@@ -12,6 +12,7 @@ if (isset($_POST['user_Login'])) {
     if ($result) {
         $row = mysqli_fetch_assoc($result);
         if(isset($row)){
+            
             $verified_password = password_verify($password, $row['password']);
 
             if ($verified_password) {
@@ -20,6 +21,8 @@ if (isset($_POST['user_Login'])) {
                 $_SESSION['username'] = $row['name_with_initials'];
                 $_SESSION['email'] = $row['email'];
                 header("location: ../index.php");
+            } else {
+                echo "<script>alert('Error!')</script>";
             }
         }
         

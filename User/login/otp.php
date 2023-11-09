@@ -1,3 +1,23 @@
+<?php 
+
+    session_start();
+
+    if(!isset($_SESSION['randomKey'])){
+        header('location: login.php');
+    }
+
+    if(isset($_POST['otp_submit'])){
+
+        $otp = $_POST['otp_code'];
+        if($otp == $_SESSION['randomKey']){
+            header('location: verify.php');
+        }
+
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,19 +33,14 @@
     <div class="login-container">
         <h2>Find Your Account</h2>
         <h4 style="font-weight:400;">Please enter the OTP</h4>
-        <form action="">
+        <form action="" method="POST">
             <!-- reg number -->
             <div class="input-icon">
                 <!-- <label for="otp">OTP </label> -->
-                <input type="text" name="" id="regno" placeholder="Verification Number" required>
+                <input type="text" name="otp_code" id="regno" placeholder="Verification Number" required>
             </div>
 
-           
-            
-
-            <button type="submit">Submit</button>
-            <br><br>
-            <button type="submit" value="cancel" style=" background-color:#bfc0c0;" class="can">Resend OTP</button>
+            <button type="submit" name="otp_submit">Submit</button>
             
         </form>
 
