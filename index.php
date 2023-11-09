@@ -509,8 +509,8 @@ function setValue($name){
             <h3>contact info</h3>
             <a href="#"><i class="fas fa-phone"></i>011-1234567</a>
             <a href="#"><i class="fas fa-phone"></i>011-1234567</a>
-            <a href="#"><i class="fas fa-envelope"></i>abc@gmail.com</a>
-            <a href="#"><i class="fas fa-envelope"></i>bcd@gmail.com</a>
+            <a href="#"><i class="fas fa-envelope"></i>medicalcenteruoj@gmail.com</a>
+            <a href="#"><i class="fas fa-envelope"></i>uoj@gmail.com</a>
             <a href="#"><i class="fas fa-map-marker-alt"></i>PO Box 57,Thirunelvely,Jaffna.Sri Lanka</a>
             
            
