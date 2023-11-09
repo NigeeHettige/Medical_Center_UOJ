@@ -10,14 +10,19 @@
         $query = "SELECT * FROM doctor WHERE nic = '$dr_nic'";
         $result = mysqli_query($connection,$query);
         if($result){
-            $row = mysqli_fetch_assoc($result);
-            $verified = password_verify($dr_password,$row['password']);
+            $rowNum = mysqli_num_rows($result);
+            if($rowNum === 1){
+                $row = mysqli_fetch_assoc($result);
+                $verified = password_verify($dr_password,$row['password']);
 
-            if($verified){
-                $_SESSION['dr_id'] = $row['dr_id'];
-                $_SESSION['dr_nic'] = $row['nic'];
-                $_SESSION['dr_name'] = $row['dr_name'];
-                header('location: index.php');
+                if($verified){
+                    $_SESSION['dr_id'] = $row['dr_id'];
+                    $_SESSION['dr_nic'] = $row['nic'];
+                    $_SESSION['dr_name'] = $row['dr_name'];
+                    header('location: index.php');
+                }
+            } else {
+                echo "<script>alert('Doctor Not found!')</script>";
             }
         }
     }

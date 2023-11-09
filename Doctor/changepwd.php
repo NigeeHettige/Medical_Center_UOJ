@@ -13,19 +13,16 @@
     <div class="login-container">
         <h2>Find Your Account</h2>
         <h4 style="font-weight:400;">Please enter your email to search for your account.</h4>
-        <form action="">
+        <form action="..\phpmailer\myMailer.php" method="POST">
             <!-- email -->
             <div class="input-icon">
                 <i class="fa fa-user"></i>
-                <input type="text" name="" id="regno" placeholder="Email" required>
+                <input type="text" name="email" id="regno" placeholder="Email" required>
             </div>
 
-           
-            
-
-            <button type="submit">Send</button>
+            <button type="submit" name="doctor_pas_changed">Send</button>
             <br><br>
-            <button type="submit" value="cancel" style=" background-color:#bfc0c0;" class="can">Cancel</button>
+            <a href="login.php" style=" background-color:#bfc0c0; width: 100%; padding: 10px 180px; border-radius: 5px; color: white;" class="can">Back</a>
             
         </form>
 

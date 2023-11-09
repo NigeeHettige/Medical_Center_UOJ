@@ -135,7 +135,7 @@
                         <div>
                             <?php
                                 $regNo = $_SESSION['reg_num'];
-                                $query1 = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date=CURDATE()";
+                                $query1 = "SELECT * FROM bookings WHERE reg_number = '$regNo' AND date=CURDATE() AND status=''";
                                 $result1 = mysqli_query($connection,$query1);
                                 if($result1){
                                     $num_rows = mysqli_num_rows($result1);
