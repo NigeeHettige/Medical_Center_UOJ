@@ -232,7 +232,7 @@
                                             FROM bookings
                                             INNER JOIN doctor ON bookings.dr_id = doctor.dr_id
                                             WHERE bookings.reg_number = '$regNo'
-                                            AND bookings.status = 'done'
+                                            AND bookings.status ='done'
                                             ORDER BY bookings.date, bookings.time_slot";
                             $result1 = mysqli_query($connection, $query1);
                             if ($result1) {
